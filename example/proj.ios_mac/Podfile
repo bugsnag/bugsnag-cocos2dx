@@ -1,6 +1,0 @@
-target 'Disco-mobile' do
-  use_frameworks!
-  platform :ios, '9.0'
-
-  pod 'Bugsnag', '5.22.5'
-end
