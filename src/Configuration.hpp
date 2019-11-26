@@ -18,6 +18,8 @@ public:
       sessionsEndpoint = sessions;
     }
 
+    string apiKey;
+
     unsigned int maxBreadcrumbs;
 
     string appVersion;

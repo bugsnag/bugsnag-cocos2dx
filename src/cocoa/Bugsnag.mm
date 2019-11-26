@@ -1,9 +1,8 @@
-// This file is only loaded on iOS, tvOS, and macOS
-#if TARGET_OS_IPHONE || TARGET_OS_TV || TARGET_OS_MAC
-
 #include "Bugsnag.hpp"
 
-#include <Bugsnag/Bugsnag.h>
+#include <BugsnagStatic/Bugsnag.h>
+
+namespace bugsnag {
 
 Configuration::Configuration(std::string apiKey) {
     this->apiKey = apiKey;
@@ -18,7 +17,7 @@ Configuration::Configuration(std::string apiKey) {
 #endif
 }
 
-void bugsnag::Bugsnag::init(Configuration *raw) {
+void Bugsnag::init(bugsnag::Configuration *raw) {
     BugsnagConfiguration *config = [BugsnagConfiguration new];
     config.apiKey = [NSString stringWithCString:raw->apiKey.c_str()
                                        encoding:NSUTF8StringEncoding];
@@ -75,5 +74,4 @@ void Bugsnag::clearMetadata(string section) {
 void Bugsnag::setContext(string context) {
 
 }
-
-#endif // Cocoa-only
+}

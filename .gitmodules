@@ -1,0 +1,6 @@
+[submodule "src/bugsnag-cocoa"]
+	path = src/cocoa/bugsnag-cocoa
+	url = https://github.com/bugsnag/bugsnag-cocoa
+[submodule "src/bugsnag-android"]
+	path = src/android/bugsnag-android
+	url = https://github.com/bugsnag/bugsnag-android
