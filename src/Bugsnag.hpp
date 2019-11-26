@@ -1,8 +1,6 @@
 #ifndef Bugsnag_hpp
 #define Bugsnag_hpp
 
-#include "Configuration.hpp"
-
 #include <iostream>
 #include <map>
 
@@ -22,10 +20,6 @@ enum BreadcrumbType {
 
 class Bugsnag {
 public:
-  static void init(string apiKey) { init(new Configuration(apiKey)); }
-
-  static void init(Configuration *config);
-
   static void notify(string name, string message);
 
   static void notify(exception *ex) { notify(typeid(ex).name(), ex->what()); }

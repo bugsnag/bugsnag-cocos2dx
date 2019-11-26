@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Release archiver
+# Depends on: jq
 #
 # Assembles the release archive in the following format:
 #
@@ -16,22 +18,22 @@
 # │   └── libbugsnag-cocos2dx-macosx.a
 # └── include
 #     └── BugsnagCocos2dx
+#         ├── cocoa/{bugsnag-cocoa public headers}
 #         └── Bugsnag.hpp
 
 PROJ_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
 
 if [ -d "$PROJ_DIR"/build/pkg ]; then
     echo "Deleting old artifacts"
-    rm -rf "$PROJ_DIR"/pkg
+    rm -rf "$PROJ_DIR"/build/pkg
 fi
 
 echo "Building staging directory..."
-mkdir -p "$PROJ_DIR"/build/pkg/{android,cocoa,include/BugsnagCocos2dx}
+mkdir -p "$PROJ_DIR"/build/pkg/{android,cocoa,include/BugsnagCocos2dx/cocoa}
 mkdir -p "$PROJ_DIR"/build/pkg/android/libs
 
 # Copy in headers that users will need
 install "$PROJ_DIR"/src/Bugsnag.hpp \
-    "$PROJ_DIR"/src/Configuration.hpp \
     "$PROJ_DIR"/build/pkg/include/BugsnagCocos2dx
 
 # Copy in CMakeLists.txt
@@ -74,6 +76,12 @@ lipo -create "$PROJ_DIR"/build/iphone*/Build/Products/Release/libBugsnagCocos2dx
 
 cp "$PROJ_DIR"/build/macosx/Build/Products/Release/libBugsnagCocos2dx.a \
     "$PROJ_DIR"/build/pkg/cocoa/libbugsnag-cocos2dx-macosx.a
+
+# Copy the cocoa-specific headers in
+install $(cat "$PROJ_DIR"/src/cocoa/bugsnag-cocoa/Bugsnag.podspec.json \
+    | jq .public_header_files[] \
+    | xargs -n 1 -I@ bash -c "ls \"$PROJ_DIR\"/src/cocoa/bugsnag-cocoa/@") \
+    "$PROJ_DIR"/build/pkg/include/BugsnagCocos2dx/cocoa
 
 # Zip everything up
 $(cd "$PROJ_DIR"/build/pkg && zip -r ../bugsnag-cocos2dx.zip .)
