@@ -8,52 +8,134 @@
 
 namespace bugsnag {
 
-void _callNativeInterfaceVoidMethod(const char *name, const char* sig) {
-  // TODO: cache reusable class and method refs
-  JNIEnv *env = cocos2d::JniHelper::getEnv();
+static const string NativeInterface = "com.bugsnag.android.NativeInterface";
+
+jstring _getBreadcrumbType(JNIEnv *env, BreadcrumbType type) {
+  switch (type) {
+  case Request:
+    return env->NewStringUTF("request");
+  case Navigation:
+    return env->NewStringUTF("navigation");
+  case Log:
+    return env->NewStringUTF("log");
+  case User:
+    return env->NewStringUTF("user");
+  case State:
+    return env->NewStringUTF("state");
+  case Process:
+    return env->NewStringUTF("process");
+  case Error:
+    return env->NewStringUTF("error");
+  case Manual:
+  default:
+    return env->NewStringUTF("manual");
+  }
+}
+
+void Bugsnag::notify(string name, string message) {
+  // TODO
+}
+
+void Bugsnag::setUser(string *id, string *name, string *email) {
+  JNIEnv *env = JniHelper::getEnv();
   if (env == nullptr) {
-    return; // The environment could not be initialized
+    return; // something has gone very wrong here.
   }
-  jclass NativeInterface = (*env).FindClass("com/bugsnag/android/NativeInterface");
-  if (NativeInterface == 0) {
-    return; // The classes could not be loaded
-  }
-  jmethodID method =
-      (*env).GetStaticMethodID(NativeInterface, name, sig);
-  if (method == 0) {
-    return; // No matching method on the class
-  }
-  (*env).CallStaticVoidMethod(NativeInterface, method);
-  (*env).DeleteLocalRef(NativeInterface);
-}
+  jobject jid = id == nullptr ? NULL : env->NewStringUTF(id);
+  jobject jname = name == nullptr ? NULL : env->NewStringUTF(name);
+  jobject jemail = email == nullptr ? NULL : env->NewStringUTF(email);
 
-void Bugsnag::notify(std::string name, std::string message) {
-}
+  JniHelper::callStaticVoidMethod(NativeInterface, "setUser", jid, jemail,
+                                  jname);
 
-void Bugsnag::setUser(std::string id, std::string name, std::string email) {}
+  env->DeleteLocalRef(jid);
+  env->DeleteLocalRef(jname);
+  env->DeleteLocalRef(jemail);
+}
 
 void Bugsnag::startSession() {
-  _callNativeInterfaceMethod("startSession", "()V");
+  JniHelper::callStaticVoidMethod(NativeInterface, "startSession");
 }
 
 void Bugsnag::pauseSession() {
-  _callNativeInterfaceMethod("stopSession", "()V");
+  JniHelper::callStaticVoidMethod(NativeInterface, "stopSession");
 }
 
 void Bugsnag::resumeSession() {
-  _callNativeInterfaceMethod("resumeSession", "()V");
+  JniHelper::callStaticBooleanMethod(NativeInterface, "resumeSession");
 }
 
 void Bugsnag::leaveBreadcrumb(string name, BreadcrumbType type,
-                              map<string, string> metadata) {}
+                              map<string, string> metadata) {
+  if (env == nullptr) {
+    return; // something has gone very wrong here.
+  }
+  jclass HashMap = env->FindClass("java/util/HashMap");
+  if (HashMap == nullptr) {
+    return;
+  }
 
-void Bugsnag::addMetadata(string section, string key, void *value) {}
+  jmethodID init = env->GetMethodID(HashMap, "<init>", "()V");
+  jobject jmetadata = env->NewObject(HashMap, init);
 
-void Bugsnag::clearMetadata(string section, string key) {}
+  jmethodID put = env->GetMethodID(
+      HashMap, "put",
+      "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
 
-void Bugsnag::clearMetadata(string section) {}
+  for (pair<string, string> item : metadata) {
+    jstring key = env->NewStringUTF(item.first.c_str());
+    jstring value = env->NewStringUTF(item.second.c_str());
+    env->CallObjectMethod(jmetadata, put, key, value);
+    env->DeleteLocalRef(key);
+    env->DeleteLocalRef(value);
+  }
 
-void Bugsnag::setContext(string context) {}
+  jstring jname = env->NewStringUTF(name);
+  jstring jtype = _getBreadcrumbType(env, type);
+  JniHelper::callStaticVoidMethod(NativeInterface, "leaveBreadcrumb", jname, jtype, jmetadata);
+
+  env->DeleteLocalRef(jname);
+  env->DeleteLocalRef(jtype);
+  env->DeleteLocalRef(jmetadata);
+  env->DeleteLocalRef(HashMap);
+}
+
+void Bugsnag::addMetadata(string section, string key, string *value) {
+  JNIEnv *env = JniHelper::getEnv();
+  if (env == nullptr) {
+    return; // something has gone very wrong here.
+  }
+  jstring jsection = env->NewStringUTF(section);
+  jstring jkey = env->NewStringUTF(key);
+  jobject jvalue = value == nullptr ? NULL : env->NewStringUTF(value);
+
+  JniHelper::callStaticVoidMethod(NativeInterface, "addToTab", jsection, jkey,
+                                  jvalue);
+
+  env->DeleteLocalRef(jsection);
+  env->DeleteLocalRef(jkey);
+  env->DeleteLocalRef(jvalue);
+}
+
+void Bugsnag::clearMetadata(string section) {
+  JNIEnv *env = JniHelper::getEnv();
+  if (env == nullptr) {
+    return; // something has gone very wrong here.
+  }
+  jstring jsection = env->NewStringUTF(section);
+  JniHelper::callStaticVoidMethod(NativeInterface, "clearTab", jsection);
+  env->DeleteLocalRef(jsection);
+}
+
+void Bugsnag::setContext(string context) {
+  JNIEnv *env = JniHelper::getEnv();
+  if (env == nullptr) {
+    return; // something has gone very wrong here.
+  }
+  jstring jcontext = env->NewStringUTF(context);
+  JniHelper::callStaticVoidMethod(NativeInterface, "setContext", jcontext);
+  env->DeleteLocalRef(jcontext);
+}
 } // namespace bugsnag
 
 #endif // Android-only
