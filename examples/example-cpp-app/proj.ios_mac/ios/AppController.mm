@@ -28,7 +28,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
-#import <BugsnagCocos2dx/Bugsnag.hpp>
+#import <BugsnagCocos2dx/cocoa/Bugsnag.h>
 
 @implementation AppController
 
@@ -41,7 +41,7 @@
 static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    bugsnag::Bugsnag::init("YOUR-API-KEY-HERE");
+    [Bugsnag startBugsnagWithApiKey:@"YOUR-API-KEY-HERE"];
     
     cocos2d::Application *app = cocos2d::Application::getInstance();
     

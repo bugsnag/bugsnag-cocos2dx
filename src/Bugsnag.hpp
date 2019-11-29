@@ -44,7 +44,17 @@ public:
    * Set information about the current user of the application which will be
    * present and searchable in subsequent error reports.
    * */
-  static void setUser(string *id, string *email, string *name);
+  static void setUser(const char *id, const char *email, const char *name);
+
+  /**
+   * Set information about the current user of the application which will be
+   * present and searchable in subsequent error reports.
+   * */
+  static void setUser(string *id, string *email, string *name) {
+    Bugsnag::setUser(id ? id->c_str() : NULL, 
+        email ? email->c_str() : NULL, 
+        name ? name->c_str() : NULL);
+  }
 
   /**
    * Starts tracking a new session.
@@ -110,17 +120,20 @@ public:
    * Leave a "breadcrumb" log message with additional information about the
    * environment at the time the breadcrumb was captured.
    */
-  static void leaveBreadcrumb(string &name, BreadcrumbType type,
+  static void leaveBreadcrumb(string name, BreadcrumbType type,
                               map<string, string> metadata);
 
   /**
    * Add custom data to send to Bugsnag with every exception. If value is null,
    *  delete the current value for key
    */
-  static void addMetadata(string section, string key, string *value);
+  static void addMetadata(string section, string key, string value);
 
   /** Remove custom data from Bugsnag reports. */
   static void clearMetadata(string section);
+
+  /** Remove custom data from Bugsnag reports. */
+  static void clearMetadata(string section, string key);
 
   /** A general summary of what was occuring in the application */
   static void setContext(string context);

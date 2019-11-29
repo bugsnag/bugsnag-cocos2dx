@@ -34,10 +34,10 @@ void Bugsnag::notify(std::string name, std::string message) {
     }];
 }
 
-void Bugsnag::setUser(std::string *ID, std::string *name, std::string *email) {
-    NSString *ns_ID = ID != nullptr ? [NSString stringWithCString:ID->c_str() encoding:NSUTF8StringEncoding] : nil;
-    NSString *ns_name = name != nullptr ? [NSString stringWithCString:name->c_str() encoding:NSUTF8StringEncoding] : nil;
-    NSString *ns_email = email != nullptr ? [NSString stringWithCString:email->c_str() encoding:NSUTF8StringEncoding] : nil;
+void Bugsnag::setUser(const char *ID, const char *name, const char *email) {
+    NSString *ns_ID = ID != nullptr ? [NSString stringWithCString:ID encoding:NSUTF8StringEncoding] : nil;
+    NSString *ns_name = name != nullptr ? [NSString stringWithCString:name encoding:NSUTF8StringEncoding] : nil;
+    NSString *ns_email = email != nullptr ? [NSString stringWithCString:email encoding:NSUTF8StringEncoding] : nil;
     [[NSClassFromString(@"Bugsnag") configuration] setUser:ns_ID withName:ns_name andEmail:ns_email];
 }
 
@@ -53,7 +53,7 @@ void Bugsnag::resumeSession() {
     [NSClassFromString(@"Bugsnag") resumeSession];
 }
 
-void Bugsnag::leaveBreadcrumb(string &name, BreadcrumbType type, map<string, string> metadata) {
+void Bugsnag::leaveBreadcrumb(string name, BreadcrumbType type, map<string, string> metadata) {
     NSMutableDictionary *ns_metadata = [NSMutableDictionary new];
     BSGBreadcrumbType ns_type = _getBreadcrumbType(type);
     NSString *ns_name = [NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding];
@@ -69,11 +69,17 @@ void Bugsnag::leaveBreadcrumb(string &name, BreadcrumbType type, map<string, str
     }];
 }
 
-void Bugsnag::addMetadata(string section, string key, string *value) {
+void Bugsnag::addMetadata(string section, string key, string value) {
     NSString *ns_section = [NSString stringWithCString:section.c_str() encoding:NSUTF8StringEncoding];
     NSString *ns_key = [NSString stringWithCString:key.c_str() encoding:NSUTF8StringEncoding];
-    NSString *ns_value = value == nullptr ? nil : [NSString stringWithCString:value->c_str() encoding:NSUTF8StringEncoding];
+    NSString *ns_value = [NSString stringWithCString:value.c_str() encoding:NSUTF8StringEncoding];
     [NSClassFromString(@"Bugsnag") addAttribute:ns_key withValue:ns_value toTabWithName:ns_section];
+}
+
+void Bugsnag::clearMetadata(string section, string key) {
+    NSString *ns_section = [NSString stringWithCString:section.c_str() encoding:NSUTF8StringEncoding];
+    NSString *ns_key = [NSString stringWithCString:key.c_str() encoding:NSUTF8StringEncoding];
+    [NSClassFromString(@"Bugsnag") addAttribute:ns_key withValue:nil toTabWithName:ns_section];
 }
 
 void Bugsnag::clearMetadata(string section) {

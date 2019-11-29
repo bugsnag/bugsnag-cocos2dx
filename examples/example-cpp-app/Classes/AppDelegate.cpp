@@ -24,6 +24,7 @@
 
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
+#include <BugsnagCocos2dx/Bugsnag.hpp>
 
 // #define USE_AUDIO_ENGINE 1
 // #define USE_SIMPLE_AUDIO_ENGINE 1
@@ -41,6 +42,8 @@ using namespace CocosDenshion;
 #endif
 
 USING_NS_CC;
+
+using namespace bugsnag;
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
@@ -78,6 +81,7 @@ static int register_all_packages()
 }
 
 bool AppDelegate::applicationDidFinishLaunching() {
+    Bugsnag::leaveBreadcrumb("finished launching", State, {{"foo", "bar"}});
     // initialize director
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();

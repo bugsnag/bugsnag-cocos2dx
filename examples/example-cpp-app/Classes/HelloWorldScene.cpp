@@ -121,6 +121,7 @@ bool HelloWorld::init()
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
+    abort(); // Crash the app
     //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();
 
