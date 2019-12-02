@@ -8,6 +8,10 @@
 # ├── CMakeLists.txt
 # ├── android
 # │   ├── Bugsnag.cpp
+# │   ├── bugsnag-plugin-android-cocos2dx
+# │   ├── private
+# │   │   ├── bugsnag.h
+# │   │   └── report.h
 # │   └── libs
 # │       ├── bugsnag-android.aar
 # │       ├── bugsnag-android-core.aar
@@ -30,7 +34,7 @@ fi
 
 echo "Building staging directory..."
 mkdir -p "$PROJ_DIR"/build/pkg/{android,cocoa,include/BugsnagCocos2dx/cocoa}
-mkdir -p "$PROJ_DIR"/build/pkg/android/libs
+mkdir -p "$PROJ_DIR"/build/pkg/android/{private,libs}
 
 # Copy in headers that users will need
 install "$PROJ_DIR"/src/Bugsnag.hpp \
@@ -57,6 +61,17 @@ done
 
 # Copy in Android source file
 install "$PROJ_DIR"/src/android/Bugsnag.cpp "$PROJ_DIR"/build/pkg/android
+
+# Copy in Android private headers
+install "$PROJ_DIR"/src/android/bugsnag-android/bugsnag-plugin-android-ndk/src/main/assets/include/{bugsnag,report}.h \
+    "$PROJ_DIR"/build/pkg/android/private
+
+# Copy in Android plugin sources
+mkdir -p "$PROJ_DIR"/build/pkg/android/bugsnag-plugin-android-cocos2dx
+cp -r "$PROJ_DIR"/src/android/bugsnag-plugin-android-cocos2dx/src \
+    "$PROJ_DIR"/build/pkg/android/bugsnag-plugin-android-cocos2dx/src
+install "$PROJ_DIR"/src/android/bugsnag-plugin-android-cocos2dx/build.gradle \
+    "$PROJ_DIR"/build/pkg/android/bugsnag-plugin-android-cocos2dx
 
 echo "Assembling cocoa artifacts..."
 

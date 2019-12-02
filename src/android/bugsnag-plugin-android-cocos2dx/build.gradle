@@ -1,0 +1,45 @@
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:3.4.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21"
+    }
+}
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16 // Minimum version supported by Cocos2dx
+        versionName "0.1.0"
+    }
+}
+
+repositories {
+    flatDir {
+        dirs '../libs'
+    }
+}
+
+dependencies {
+    // Plugin source is in kotlin and uses stdlib functions. In addition,
+    // the bugsnag-plugin-android-* libs share this runtime dependency.
+    api "org.jetbrains.kotlin:kotlin-stdlib:1.3.21"
+
+    runtimeOnly(name:'bugsnag-android', ext:'aar')
+    api(name:'bugsnag-android-core', ext:'aar')
+    api(name:'bugsnag-plugin-android-ndk', ext:'aar')
+    runtimeOnly(name:'bugsnag-plugin-android-anr', ext:'aar')
+}
+
+task unpackBuildDeps(type: Copy) {
+    description 'Unpacks the library dependencies from zip files into a linkable location'
+    from zipTree(file('../libs/bugsnag-plugin-android-ndk.aar'))
+    into file("${project.buildDir}/unpacked/bugsnag-plugin-android-ndk")
+}
+
+tasks.preBuild.dependsOn(unpackBuildDeps)
