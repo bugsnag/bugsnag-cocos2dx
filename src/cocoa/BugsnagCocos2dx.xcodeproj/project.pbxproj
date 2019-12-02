@@ -10,6 +10,7 @@
 		8A4565C2238C3BCB0014EFF7 /* Bugsnag.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */; };
 		8A4565D0238C3BF80014EFF7 /* libBugsnagStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4565CE238C3BEA0014EFF7 /* libBugsnagStatic.a */; };
 		8A4565D1238C3C130014EFF7 /* Bugsnag.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4565C0238C3BCB0014EFF7 /* Bugsnag.hpp */; };
+		8A72A02C239571A100328051 /* BugsnagCocos2dxPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bugsnag.mm; sourceTree = "<group>"; };
 		8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bugsnag.xcodeproj; path = "bugsnag-cocoa/iOS/Bugsnag.xcodeproj"; sourceTree = "<group>"; };
 		8A4565D4238C3FF90014EFF7 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = "bugsnag-cocoa/Configurations/Config.xcconfig"; sourceTree = "<group>"; };
+		8A72A02A239571A100328051 /* BugsnagCocos2dxPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BugsnagCocos2dxPlugin.h; sourceTree = "<group>"; };
+		8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BugsnagCocos2dxPlugin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,8 @@
 				8A4565C0238C3BCB0014EFF7 /* Bugsnag.hpp */,
 				8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */,
 				8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */,
+				8A72A02A239571A100328051 /* BugsnagCocos2dxPlugin.h */,
+				8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.m */,
 			);
 			name = BugsnagCocos2dx;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 				8A4565AB238C394E0014EFF7 /* Sources */,
 				8A4565AC238C394E0014EFF7 /* Frameworks */,
 				8A4565AD238C394E0014EFF7 /* CopyFiles */,
+				8A4565E7238DABE60014EFF7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -204,12 +210,33 @@
 		};
 /* End PBXReferenceProxy section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8A4565E7238DABE60014EFF7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/bin/env bash";
+			shellScript = "mkdir -p \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n\ninstall \"$SOURCE_ROOT/bugsnag-cocoa/Source/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagConfiguration.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagCrashReport.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagMetaData.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagBreadcrumb.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BSG_KSCrashReportWriter.h\" \\\n  \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8A4565AB238C394E0014EFF7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8A4565C2238C3BCB0014EFF7 /* Bugsnag.mm in Sources */,
+				8A72A02C239571A100328051 /* BugsnagCocos2dxPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

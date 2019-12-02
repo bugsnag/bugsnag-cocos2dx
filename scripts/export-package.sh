@@ -23,6 +23,7 @@
 # └── include
 #     └── BugsnagCocos2dx
 #         ├── cocoa/{bugsnag-cocoa public headers}
+#         ├── BugsnagCocos2dxPlugin.h
 #         └── Bugsnag.hpp
 
 PROJ_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
@@ -96,6 +97,8 @@ cp "$PROJ_DIR"/build/macosx/Build/Products/Release/libBugsnagCocos2dx.a \
 install $(cat "$PROJ_DIR"/src/cocoa/bugsnag-cocoa/Bugsnag.podspec.json \
     | jq .public_header_files[] \
     | xargs -n 1 -I@ bash -c "ls \"$PROJ_DIR\"/src/cocoa/bugsnag-cocoa/@") \
+    "$PROJ_DIR"/build/pkg/include/BugsnagCocos2dx/cocoa
+install "$PROJ_DIR"/src/cocoa/BugsnagCocos2dxPlugin.h \
     "$PROJ_DIR"/build/pkg/include/BugsnagCocos2dx/cocoa
 
 # Zip everything up
