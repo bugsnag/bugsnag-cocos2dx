@@ -30,6 +30,7 @@ import android.os.Build;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import com.bugsnag.android.Bugsnag;
+import com.bugsnag.android.BugsnagCocos2dxPlugin;
 
 public class AppActivity extends Cocos2dxActivity {
 
@@ -46,7 +47,8 @@ public class AppActivity extends Cocos2dxActivity {
             // Don't need to finish it again since it's finished in super.onCreate .
             return;
         }
-        Bugsnag.init(this, "YOUR-API-KEY-HERE");
+        BugsnagCocos2dxPlugin.register();
+        Bugsnag.init(this);
 
         // Make sure we're running on Pie or higher to change cutout mode
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

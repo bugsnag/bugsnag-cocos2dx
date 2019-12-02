@@ -16,6 +16,10 @@
         <meta-data android:name="android.app.lib_name"
                    android:value="MyGame" />
 
+        <!-- Tell Bugsnag our API key -->
+        <meta-data android:name="com.bugsnag.android.API_KEY"
+                   android:value="YOUR-API-KEY-HERE" />
+
         <activity
             android:name="org.cocos2dx.cpp.AppActivity"
             android:screenOrientation="landscape"

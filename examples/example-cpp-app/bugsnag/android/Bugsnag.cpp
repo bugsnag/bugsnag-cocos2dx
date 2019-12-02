@@ -4,7 +4,9 @@
 #include <BugsnagCocos2dx/Bugsnag.hpp>
 
 #include <cocos/platform/android/jni/JniHelper.h>
+#include <cocos/cocos2d.h>
 #include <jni.h>
+#include <bugsnag.h>
 
 namespace bugsnag {
 
@@ -33,7 +35,11 @@ jstring _getBreadcrumbType(JNIEnv *env, BreadcrumbType type) {
 }
 
 void Bugsnag::notify(string name, string message) {
-  // TODO
+  JNIEnv *env = cocos2d::JniHelper::getEnv();
+  if (env == nullptr) {
+    return; // something has gone very wrong here.
+  }
+  bugsnag_notify_env(env, (char *)name.c_str(), (char *)message.c_str(), BSG_SEVERITY_WARN);
 }
 
 void Bugsnag::setUser(const char *id, const char *name, const char *email) {
@@ -159,5 +165,12 @@ void Bugsnag::setContext(string context) {
                                            context);
 }
 } // namespace bugsnag
+
+extern "C" {
+JNIEXPORT jstring JNICALL Java_com_bugsnag_android_BugsnagCocos2dxPlugin_getCocos2dVersion(
+        JNIEnv *env, jobject _this) {
+  return env->NewStringUTF(cocos2d::cocos2dVersion());
+}
+}
 
 #endif // Android-only

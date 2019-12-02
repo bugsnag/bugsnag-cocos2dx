@@ -1,6 +1,7 @@
 import org.gradle.internal.os.OperatingSystem
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.bugsnag.android.gradle'
 
 android {
     compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
@@ -131,10 +132,5 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':libcocos2dx')
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.21"
-    implementation(name:'bugsnag-android', ext:'aar')
-    implementation(name:'bugsnag-android-core', ext:'aar')
-    implementation(name:'bugsnag-plugin-android-ndk', ext:'aar')
-    implementation(name:'bugsnag-plugin-android-anr', ext:'aar')
+    implementation project(':bugsnag-cocos2dx')
 }
