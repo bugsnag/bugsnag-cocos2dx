@@ -9,7 +9,7 @@ public class BugsnagCocos2dxPlugin : BugsnagPlugin {
     companion object {
         @JvmStatic
         fun register(client: Client) {
-            BugsnagPluginInterface.loadPlugin(client, BugsnagCocos2dxPlugin::class.java)
+            BugsnagPluginInterface.registerPlugin(BugsnagCocos2dxPlugin::class.java)
         }
     }
 
