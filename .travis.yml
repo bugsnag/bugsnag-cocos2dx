@@ -38,9 +38,10 @@ before_script:
 
 script: ./scripts/export-package.sh
 stages:
-- build
+- name: build
+  if: tag IS blank
 - name: deploy
-  if: branch = master AND tag IS present
+  if: tag IS present
 jobs:
   include:
   - stage: build
