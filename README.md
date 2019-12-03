@@ -21,11 +21,10 @@ and mobile apps, helping you to understand and resolve them as fast as possible.
 1. [Create a Bugsnag account](https://bugsnag.com)
 1. Complete the instructions in the [integration guide](https://docs.bugsnag.com/platforms/cocos2dx/) to report unhandled exceptions thrown from your app
 1. Report handled exceptions using [`Bugsnag::notify()`](https://docs.bugsnag.com/platforms/cocos2dx/#reporting-handled-errors)
-1. Customize your integration using the [configuration options](https://docs.bugsnag.com/platforms/cocos2dx/configuration-options/)
 
 ## Support
 
-* [Read the integration guide](https://docs.bugsnag.com/platforms/cocos2dx/) or [configuration options documentation](https://docs.bugsnag.com/platforms/cocos2dx/configuration-options/)
+* [Read the integration guide](https://docs.bugsnag.com/platforms/cocos2dx/) or configuration options documentation for [Android](https://docs.bugsnag.com/platforms/android/configuration-options/) or [iOS/macOS](https://docs.bugsnag.com/platforms/ios/configuration-options/)
 * [Search open and closed issues](https://github.com/bugsnag/bugsnag-cocos2dx/issues?utf8=✓&q=is%3Aissue) for similar problems
 * [Report a bug or request a feature](https://github.com/bugsnag/bugsnag-cocos2dx/issues/new)
 
