@@ -28,6 +28,9 @@
 
 PROJ_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
 
+# Stop the script when things go wrong
+set -e pipefail
+
 if [ -d "$PROJ_DIR"/build/pkg ]; then
     echo "Deleting old artifacts"
     rm -rf "$PROJ_DIR"/build/pkg
@@ -46,11 +49,12 @@ install "$PROJ_DIR"/src/CMakeLists.txt "$PROJ_DIR"/build/pkg/
 
 echo "Assembling android artifacts..."
 mkdir -p "$PROJ_DIR"/build/android
-$(cd src/android/bugsnag-android && \
-    ./gradlew bugsnag-android-core:assembleRelease && \
-    ./gradlew bugsnag-plugin-android-ndk:assembleRelease && \
-    ./gradlew bugsnag-plugin-android-anr:assembleRelease && \
-    ./gradlew bugsnag-android:assembleRelease)
+pushd src/android/bugsnag-android
+    ./gradlew bugsnag-android-core:assembleRelease
+    ./gradlew bugsnag-plugin-android-ndk:assembleRelease
+    ./gradlew bugsnag-plugin-android-anr:assembleRelease
+    ./gradlew bugsnag-android:assembleRelease
+popd
 
 ANDROID_ARTIFACTS=$(ls "$PROJ_DIR"/src/android/bugsnag-android/bugsnag-*/build/outputs/aar/bugsnag-{android,android-core,plugin-*}-release.aar)
 
@@ -102,5 +106,7 @@ install "$PROJ_DIR"/src/cocoa/BugsnagCocos2dxPlugin.h \
     "$PROJ_DIR"/build/pkg/include/BugsnagCocos2dx/cocoa
 
 # Zip everything up
-$(cd "$PROJ_DIR"/build/pkg && zip -r ../bugsnag-cocos2dx.zip .)
+pushd "$PROJ_DIR"/build/pkg
+    zip -r ../bugsnag-cocos2dx.zip .
+popd
 
