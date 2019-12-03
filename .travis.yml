@@ -27,6 +27,7 @@ env:
   - HOMEBREW_NO_INSTALL_CLEANUP=1
   - ANDROID_HOME=/usr/local/share/android-sdk
   - ANDROID_NDK_HOME=/usr/local/share/android-ndk
+  - TERM=dumb # Stop interactive gradle output
 
 # Configure android build
 before_script:
