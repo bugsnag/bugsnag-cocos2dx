@@ -50,10 +50,10 @@ install "$PROJ_DIR"/src/CMakeLists.txt "$PROJ_DIR"/build/pkg/
 echo "Assembling android artifacts..."
 mkdir -p "$PROJ_DIR"/build/android
 pushd src/android/bugsnag-android
-    ./gradlew bugsnag-android-core:assembleRelease
-    ./gradlew bugsnag-plugin-android-ndk:assembleRelease
-    ./gradlew bugsnag-plugin-android-anr:assembleRelease
-    ./gradlew bugsnag-android:assembleRelease
+    ./gradlew --quiet bugsnag-android-core:assembleRelease
+    ./gradlew --quiet bugsnag-plugin-android-ndk:assembleRelease
+    ./gradlew --quiet bugsnag-plugin-android-anr:assembleRelease
+    ./gradlew --quiet bugsnag-android:assembleRelease
 popd
 
 ANDROID_ARTIFACTS=$(ls "$PROJ_DIR"/src/android/bugsnag-android/bugsnag-*/build/outputs/aar/bugsnag-{android,android-core,plugin-*}-release.aar)
@@ -83,7 +83,7 @@ echo "Assembling cocoa artifacts..."
 # Build cocoa artifacts for each SDK
 for sdk in iphoneos iphonesimulator macosx
 do
-    xcodebuild -scheme BugsnagCocos2dx \
+    xcodebuild -quiet -scheme BugsnagCocos2dx \
         -project "$PROJ_DIR"/src/cocoa/BugsnagCocos2dx.xcodeproj \
         -configuration Release \
         -derivedDataPath build/$sdk \
