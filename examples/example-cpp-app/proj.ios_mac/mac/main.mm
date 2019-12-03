@@ -26,13 +26,14 @@
 #include "AppDelegate.h"
 #include "cocos2d.h"
 #import <BugsnagCocos2dx/cocoa/BugsnagCocos2dxPlugin.h>
+#import <BugsnagCocos2dx/cocoa/Bugsnag.h>
 
 USING_NS_CC;
 
 int main(int argc, char *argv[])
 {
-    [BugsnagCocos2dxPlugin startBugsnagWithApiKey:@"YOUR-API-KEY-HERE"
-                                   cocos2dVersion:cocos2d::cocos2dVersion()];
+    [BugsnagCocos2dxPlugin registerWithCocos2dVersion:cocos2dVersion()];
+    [Bugsnag startBugsnagWithApiKey:@"YOUR-API-KEY-HERE"];
     
     AppDelegate app;
     return Application::getInstance()->run();

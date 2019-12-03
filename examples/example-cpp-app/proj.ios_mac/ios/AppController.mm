@@ -29,6 +29,7 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import <BugsnagCocos2dx/cocoa/BugsnagCocos2dxPlugin.h>
+#import <BugsnagCocos2dx/cocoa/Bugsnag.h>
 #import <cocos/cocos2d.h>
 
 @implementation AppController
@@ -42,8 +43,8 @@
 static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [BugsnagCocos2dxPlugin startBugsnagWithApiKey:@"YOUR-API-KEY-HERE"
-                                   cocos2dVersion:cocos2d::cocos2dVersion()];
+    [BugsnagCocos2dxPlugin registerWithCocos2dVersion:cocos2d::cocos2dVersion()];
+    [Bugsnag startBugsnagWithApiKey:@"YOUR-API-KEY-HERE"];
     
     cocos2d::Application *app = cocos2d::Application::getInstance();
     

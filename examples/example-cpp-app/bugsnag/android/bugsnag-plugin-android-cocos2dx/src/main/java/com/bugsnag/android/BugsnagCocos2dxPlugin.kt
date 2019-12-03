@@ -5,12 +5,18 @@ import com.bugsnag.android.cocos2dx.BuildConfig
 public class BugsnagCocos2dxPlugin : BugsnagPlugin {
 
     override var loaded = false
+    // Formatted, cached copy of cocos2d version
+    private val version: String
 
     companion object {
         @JvmStatic
-        fun register(client: Client) {
+        fun register() {
             BugsnagPluginInterface.registerPlugin(BugsnagCocos2dxPlugin::class.java)
         }
+    }
+
+    init {
+        version = getCocos2dVersion().split("-", " ").last()
     }
 
     override fun loadPlugin(client: Client) {
@@ -20,9 +26,8 @@ public class BugsnagCocos2dxPlugin : BugsnagPlugin {
             report.notifier.version = BuildConfig.VERSION_NAME
             report.notifier.setURL("https://github.com/bugsnag/bugsnag-cocos2dx")
 
-            val cocos2dVersion = getCocos2dVersion().split("-", " ").last()
             var runtimeVersions = getRuntimeVersions(report)
-            runtimeVersions.set("cocos2dx", cocos2dVersion as Object)
+            runtimeVersions.set("cocos2dx", version as Object)
             true
         }
         Logger.info("Initialized Cocos2d-x plugin " + BuildConfig.VERSION_NAME);
