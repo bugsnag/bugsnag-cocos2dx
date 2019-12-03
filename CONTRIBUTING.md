@@ -72,10 +72,8 @@ with an update to the changelog with the new fixes and features.
 ### Making the release
 
 1. Update the changelog with new features and fixes
-2. Increment the version number in:
-   * src/android/bugsnag-plugin-android-cocos2dx/build.gradle
-   * src/cocoa/BugsnagCocos2dxPlugin.m
-3. Update the CHANGELOG.md and add the current version and date
+2. Bump the version number using `./scripts/bump-version.sh [number]`
+3. Commit, tag the changes, and push
 4. Run `./scripts/export-package.sh`
 5. Create a new release on GitHub, copying the changelog entry and
    `build/bugsnag-cocos2dx.zip`

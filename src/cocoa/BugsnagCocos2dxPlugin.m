@@ -4,6 +4,10 @@
 
 #import "BugsnagCocos2dxPlugin.h"
 
+// Turn a preprocessor macro into an NSString (https://stackoverflow.com/a/14679202)
+#define NSStringize_helper(x) #x
+#define NSStringize(x) @NSStringize_helper(x)
+
 @interface Bugsnag ()
 + (BugsnagNotifier *)notifier;
 + (void)registerPlugin:(id<BugsnagPlugin>)plugin;
@@ -13,8 +17,6 @@
 @property(nonatomic, getter=isStarted) BOOL started;
 @property(nonatomic) NSString *cocos2dVersion;
 @end
-
-NSString *const BUGSNAG_COCOS2DX_VERSION = @"0.1.0";
 
 @implementation BugsnagCocos2dxPlugin
 
@@ -46,7 +48,7 @@ NSString *const BUGSNAG_COCOS2DX_VERSION = @"0.1.0";
 - (void)setNotifierDetails {
   id notifier = [Bugsnag notifier];
   NSDictionary *newDetails = @{
-    @"version" : BUGSNAG_COCOS2DX_VERSION,
+    @"version" : NSStringize(BUGSNAG_COCOS2DX_VERSION),
     @"name" : @"Bugsnag Cocos2d-x",
     @"url" : @"https://github.com/bugsnag/bugsnag-cocos2dx"
   };

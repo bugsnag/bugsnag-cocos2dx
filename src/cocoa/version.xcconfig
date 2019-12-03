@@ -1,0 +1,2 @@
+// bugsnag-cocos2dx version number
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) BUGSNAG_COCOS2DX_VERSION=0.1.0
