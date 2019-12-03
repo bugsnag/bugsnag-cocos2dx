@@ -226,7 +226,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/usr/bin/env bash";
-			shellScript = "mkdir -p \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n\ninstall \"$SOURCE_ROOT/bugsnag-cocoa/Source/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagConfiguration.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagCrashReport.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagMetaData.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagBreadcrumb.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BSG_KSCrashReportWriter.h\" \\\n  \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n";
+			shellScript = "mkdir -p \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n\ninstall \"$SOURCE_ROOT/bugsnag-cocoa/Source/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagConfiguration.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagCrashReport.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagMetaData.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagBreadcrumb.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BSG_KSCrashReportWriter.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagPlugin.h\" \\\n  \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
