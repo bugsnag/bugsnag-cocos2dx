@@ -27,10 +27,13 @@ BSGBreadcrumbType _getBreadcrumbType(BreadcrumbType type) {
 }
 
 void Bugsnag::notify(std::string name, std::string message) {
-    [NSClassFromString(@"Bugsnag") notifyError:[NSError new]
-                                         block:^(BugsnagCrashReport *_Nonnull report) {
-        report.errorClass = [NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding];
-        report.errorMessage = [NSString stringWithCString:message.c_str() encoding:NSUTF8StringEncoding];
+    NSString *errorClass = [NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding];
+    NSString *errorMessage = [NSString stringWithCString:message.c_str() encoding:NSUTF8StringEncoding];
+    NSException *exception = [NSException exceptionWithName:errorClass reason:errorMessage userInfo:nil];
+    [NSClassFromString(@"Bugsnag") notify:exception
+                                    block:^(BugsnagCrashReport *_Nonnull report) {
+        report.errorClass = errorClass;
+        report.errorMessage = errorMessage;
     }];
 }
 
