@@ -1,5 +1,6 @@
 # Bugsnag error reporter for Cocos2d-x
 [![Documentation](https://img.shields.io/badge/documentation-latest-blue.svg)](http://docs.bugsnag.com/platforms/cocos2dx/)
+[![Build status](https://api.travis-ci.com/bugsnag/bugsnag-cocos2dx.svg?branch=master)](https://travis-ci.com/bugsnag/bugsnag-cocos2dx)
 
 The Bugsnag Notifier for Cocos2d-x gives you instant notification of uncaught
 exceptions and native crashes thrown from your Cocos2d-x games on iOS, macOS and
