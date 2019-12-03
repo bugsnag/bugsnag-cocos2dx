@@ -48,16 +48,18 @@ jobs:
   - stage: build
     name: Build package
   - stage: deploy
-    before_deploy: ./scripts/get-release-notes.sh > release_notes.txt
+    before_deploy: 
+    - ./scripts/get-release-notes.sh > $TRAVIS_BUILD_DIR/build/release_notes.txt
     name: Make release
+    script: ./scripts/export-package.sh
     deploy:
-      release_notes_file: release_notes.txt
       provider: releases
-      file: build/bugsnag-cocos2dx.zip
-      token:
-        secure: EqkAxzz7v39EJVCwHzR7HKilMIiMHUeIk4+f0YL7b6l8k2LiWSHOPmwnbMlG3/58gSIICIEiR8j5I6PWIFRgpSQBF8nXo1y+QMIYOPHaMA4ZnAZC01hbKkEh86HYWhqETy2N/yvI4rRr7/ROMaEtx03l7o1V5VeDLio3SArp5BlZfw2vqQhqJlTbw8lsYagWNVCSyKww4cRqNLyEd055OnOuCoxk9dxPBoK0yoWkREEaJFgoyHgyXMNJcuoZ6qXaWHJ01dLoi8EjHXRfJXdBS/jUM8MOz1Y2YKtfKB4WhuAgd/yZ29Vue6qY0ZShAXveOZNqwOddic5t/i56gy56MzvE41JPOmpTruoK6xlE/Hq5qeOgvJK80tq5ByjmcdFxb9Psg97Q1JhouazfFg/5EtJCqJkF0T4BRv1s9yCemgFqw1P0S8B4gWF3cso0uzkU5GsFbRX+OOoOXnit0LKEuJfUokF1jDY02qfoec++gKwrLz6Exe2lsA3ijiUjWw4rpZ4p0MkswVxqO0Mm89MLUB3Pj9svGP9QtwHQ6IZX1DrAuuwDbZf4Fkz/v2K8Nk3Cl6lZ/4J7f+Qf8BGNUom09vFyLFIskIny/5hyfdMsNKsdRwKvddgZiXR8BBZ3pqCa0ZCx9D74BaTzyXpdis1N89j8J9rEgHg1fh2UcLeEdlQ=
+      # Use dpl v2. Needed for release_notes_file, skipping cleanup, token format
+      # https://docs.travis-ci.com/user/deployment-v2/providers/releases/
+      edge: true
+      release_notes_file: $TRAVIS_BUILD_DIR/build/release_notes.txt
+      file: $TRAVIS_BUILD_DIR/build/bugsnag-cocos2dx.zip
+      token: EqkAxzz7v39EJVCwHzR7HKilMIiMHUeIk4+f0YL7b6l8k2LiWSHOPmwnbMlG3/58gSIICIEiR8j5I6PWIFRgpSQBF8nXo1y+QMIYOPHaMA4ZnAZC01hbKkEh86HYWhqETy2N/yvI4rRr7/ROMaEtx03l7o1V5VeDLio3SArp5BlZfw2vqQhqJlTbw8lsYagWNVCSyKww4cRqNLyEd055OnOuCoxk9dxPBoK0yoWkREEaJFgoyHgyXMNJcuoZ6qXaWHJ01dLoi8EjHXRfJXdBS/jUM8MOz1Y2YKtfKB4WhuAgd/yZ29Vue6qY0ZShAXveOZNqwOddic5t/i56gy56MzvE41JPOmpTruoK6xlE/Hq5qeOgvJK80tq5ByjmcdFxb9Psg97Q1JhouazfFg/5EtJCqJkF0T4BRv1s9yCemgFqw1P0S8B4gWF3cso0uzkU5GsFbRX+OOoOXnit0LKEuJfUokF1jDY02qfoec++gKwrLz6Exe2lsA3ijiUjWw4rpZ4p0MkswVxqO0Mm89MLUB3Pj9svGP9QtwHQ6IZX1DrAuuwDbZf4Fkz/v2K8Nk3Cl6lZ/4J7f+Qf8BGNUom09vFyLFIskIny/5hyfdMsNKsdRwKvddgZiXR8BBZ3pqCa0ZCx9D74BaTzyXpdis1N89j8J9rEgHg1fh2UcLeEdlQ=
       draft: true
-      cleanup: false
       on:
         tags: true
-        repo: bugsnag/bugsnag-cocos2dx
