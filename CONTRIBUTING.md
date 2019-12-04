@@ -74,9 +74,8 @@ with an update to the changelog with the new fixes and features.
 1. Update the changelog with new features and fixes
 2. Bump the version number using `./scripts/bump-version.sh [number]`
 3. Commit, tag the changes, and push
-4. Run `./scripts/export-package.sh`
-5. Create a new release on GitHub, copying the changelog entry and
-   `build/bugsnag-cocos2dx.zip`
+4. Wait for the CI build, which will draft a new release on GitHub
+5. Edit the release on GitHub, copying the changelog entry
 
 #### Post-release checks
 
