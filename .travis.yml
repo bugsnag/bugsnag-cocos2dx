@@ -38,16 +38,19 @@ before_script:
 - rm ndk.zip
 - mv android-ndk-r16b $ANDROID_NDK_HOME
 
-script: ./scripts/export-package.sh
 stages:
-- name: build
+- name: test
   if: tag IS blank
 - name: deploy
   if: tag IS present
 jobs:
   include:
-  - stage: build
-    name: Build package
+  - stage: test
+    name: Build and test package
+    script: 
+    - xcodebuild -quiet -sdk macosx -project src/cocoa/BugsnagCocos2dx.xcodeproj -scheme BugsnagCocos2dx clean test
+    - xcodebuild -quiet -sdk iphonesimulator -project src/cocoa/BugsnagCocos2dx.xcodeproj -scheme BugsnagCocos2dx -destination 'platform=iOS Simulator,OS=11.3,name=iPhone X' clean test
+    - ./scripts/export-package.sh
   - stage: deploy
     name: Make release
     script: ./scripts/export-package.sh

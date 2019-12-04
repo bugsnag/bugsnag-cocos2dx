@@ -21,20 +21,23 @@
 @implementation BugsnagCocos2dxPlugin
 
 + (void)registerWithCocos2dVersion:(const char *)rawVersion {
-  // cocos2d::cocos2dVersion() is in the format "cocos2d-x-3.1.0" or
-  // "cocos2d-x 3.17.0", so we make some small adjustments to correctly format
-  // the value to a semantic version.
-  NSString *ns_rawVersion =
-      rawVersion == NULL ? nil
-                         : [NSString stringWithCString:rawVersion
-                                              encoding:NSUTF8StringEncoding];
-  NSCharacterSet *separators =
-      [NSCharacterSet characterSetWithCharactersInString:@"- "];
-  NSString *cocos2dVersion = [[ns_rawVersion
-      componentsSeparatedByCharactersInSet:separators] lastObject];
   BugsnagCocos2dxPlugin *plugin = [BugsnagCocos2dxPlugin new];
-  plugin.cocos2dVersion = cocos2dVersion;
+  plugin.cocos2dVersion = [self parseCocos2dVersion:rawVersion];
   [Bugsnag registerPlugin:plugin];
+}
+
++ (NSString *)parseCocos2dVersion:(const char *)rawVersion {
+    // cocos2d::cocos2dVersion() is in the format "cocos2d-x-3.1.0" or
+    // "cocos2d-x 3.17.0", so we make some small adjustments to correctly format
+    // the value to a semantic version.
+    NSString *ns_rawVersion =
+        rawVersion == NULL ? nil
+                           : [NSString stringWithCString:rawVersion
+                                                encoding:NSUTF8StringEncoding];
+    NSCharacterSet *separators =
+        [NSCharacterSet characterSetWithCharactersInString:@"- "];
+    return [[ns_rawVersion
+        componentsSeparatedByCharactersInSet:separators] lastObject];
 }
 
 - (void)start {

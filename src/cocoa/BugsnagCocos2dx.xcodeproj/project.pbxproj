@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A3C591B2396DB2600B344AA /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C591A2396DB2600B344AA /* Tests.m */; };
+		8A3C591D2396DB2600B344AA /* libBugsnagCocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4565AF238C394E0014EFF7 /* libBugsnagCocos2dx.a */; };
+		8A3C59262396E3E400B344AA /* BugsnagCocos2dxPlugin.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3C590E239687D600B344AA /* BugsnagCocos2dxPlugin.h */; };
+		8A3C59282396EBAD00B344AA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3C59272396EBAD00B344AA /* libc++.tbd */; };
 		8A4565C2238C3BCB0014EFF7 /* Bugsnag.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */; };
 		8A4565D0238C3BF80014EFF7 /* libBugsnagStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4565CE238C3BEA0014EFF7 /* libBugsnagStatic.a */; };
 		8A4565D1238C3C130014EFF7 /* Bugsnag.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4565C0238C3BCB0014EFF7 /* Bugsnag.hpp */; };
@@ -14,6 +18,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8A3C591E2396DB2600B344AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4565A7238C394E0014EFF7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A4565AE238C394E0014EFF7;
+			remoteInfo = BugsnagCocos2dx;
+		};
 		8A4565C9238C3BEA0014EFF7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
@@ -45,6 +56,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8A3C59252396E3DB00B344AA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)/cocoa";
+			dstSubfolderSpec = 16;
+			files = (
+				8A3C59262396E3E400B344AA /* BugsnagCocos2dxPlugin.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A4565AD238C394E0014EFF7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,6 +80,10 @@
 
 /* Begin PBXFileReference section */
 		8A3C590E239687D600B344AA /* BugsnagCocos2dxPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BugsnagCocos2dxPlugin.h; sourceTree = "<group>"; };
+		8A3C59182396DB2600B344AA /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A3C591A2396DB2600B344AA /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		8A3C591C2396DB2600B344AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A3C59272396EBAD00B344AA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		8A4565AF238C394E0014EFF7 /* libBugsnagCocos2dx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBugsnagCocos2dx.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A4565C0238C3BCB0014EFF7 /* Bugsnag.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Bugsnag.hpp; path = ../Bugsnag.hpp; sourceTree = "<group>"; };
 		8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bugsnag.mm; sourceTree = "<group>"; };
@@ -69,6 +94,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8A3C59152396DB2600B344AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A3C59282396EBAD00B344AA /* libc++.tbd in Frameworks */,
+				8A3C591D2396DB2600B344AA /* libBugsnagCocos2dx.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A4565AC238C394E0014EFF7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,10 +114,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A3C59192396DB2600B344AA /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8A3C591A2396DB2600B344AA /* Tests.m */,
+				8A3C591C2396DB2600B344AA /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		8A4565A6238C394E0014EFF7 = {
 			isa = PBXGroup;
 			children = (
 				8A4565B1238C394E0014EFF7 /* BugsnagCocos2dx */,
+				8A3C59192396DB2600B344AA /* Tests */,
 				8A4565B0238C394E0014EFF7 /* Products */,
 				8A4565CF238C3BF80014EFF7 /* Frameworks */,
 			);
@@ -93,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				8A4565AF238C394E0014EFF7 /* libBugsnagCocos2dx.a */,
+				8A3C59182396DB2600B344AA /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,6 +169,7 @@
 		8A4565CF238C3BF80014EFF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A3C59272396EBAD00B344AA /* libc++.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -131,6 +177,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8A3C59172396DB2600B344AA /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A3C59242396DB2600B344AA /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				8A3C59142396DB2600B344AA /* Sources */,
+				8A3C59152396DB2600B344AA /* Frameworks */,
+				8A3C59162396DB2600B344AA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8A3C591F2396DB2600B344AA /* PBXTargetDependency */,
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 8A3C59182396DB2600B344AA /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		8A4565AE238C394E0014EFF7 /* BugsnagCocos2dx */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A4565B8238C394E0014EFF7 /* Build configuration list for PBXNativeTarget "BugsnagCocos2dx" */;
@@ -139,6 +203,7 @@
 				8A4565AC238C394E0014EFF7 /* Frameworks */,
 				8A4565AD238C394E0014EFF7 /* CopyFiles */,
 				8A4565E7238DABE60014EFF7 /* ShellScript */,
+				8A3C59252396E3DB00B344AA /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -159,6 +224,9 @@
 				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = Bugsnag;
 				TargetAttributes = {
+					8A3C59172396DB2600B344AA = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					8A4565AE238C394E0014EFF7 = {
 						CreatedOnToolsVersion = 11.1;
 					};
@@ -184,6 +252,7 @@
 			projectRoot = "";
 			targets = (
 				8A4565AE238C394E0014EFF7 /* BugsnagCocos2dx */,
+				8A3C59172396DB2600B344AA /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -212,6 +281,16 @@
 		};
 /* End PBXReferenceProxy section */
 
+/* Begin PBXResourcesBuildPhase section */
+		8A3C59162396DB2600B344AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
 		8A4565E7238DABE60014EFF7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -233,6 +312,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8A3C59142396DB2600B344AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A3C591B2396DB2600B344AA /* Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A4565AB238C394E0014EFF7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,6 +332,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8A3C591F2396DB2600B344AA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8A4565AE238C394E0014EFF7 /* BugsnagCocos2dx */;
+			targetProxy = 8A3C591E2396DB2600B344AA /* PBXContainerItemProxy */;
+		};
 		8A4565D3238C3D660014EFF7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BugsnagStatic;
@@ -253,6 +345,44 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		8A3C59202396DB2600B344AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Config.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 372ZUL2ZB7;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bugsnag.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8A3C59212396DB2600B344AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Config.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 372ZUL2ZB7;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.bugsnag.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		8A4565B6238C394E0014EFF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -394,6 +524,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8A3C59242396DB2600B344AA /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8A3C59202396DB2600B344AA /* Debug */,
+				8A3C59212396DB2600B344AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8A4565AA238C394E0014EFF7 /* Build configuration list for PBXProject "BugsnagCocos2dx" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
