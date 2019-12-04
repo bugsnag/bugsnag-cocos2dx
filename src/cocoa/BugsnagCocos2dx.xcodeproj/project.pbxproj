@@ -89,7 +89,6 @@
 		8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bugsnag.mm; sourceTree = "<group>"; };
 		8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bugsnag.xcodeproj; path = "bugsnag-cocoa/iOS/Bugsnag.xcodeproj"; sourceTree = "<group>"; };
 		8A4565D4238C3FF90014EFF7 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = "bugsnag-cocoa/Configurations/Config.xcconfig"; sourceTree = "<group>"; };
-		8A72A02A239571A100328051 /* version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = version.xcconfig; sourceTree = "<group>"; };
 		8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BugsnagCocos2dxPlugin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,7 +144,6 @@
 		8A4565B1238C394E0014EFF7 /* BugsnagCocos2dx */ = {
 			isa = PBXGroup;
 			children = (
-				8A72A02A239571A100328051 /* version.xcconfig */,
 				8A4565D4238C3FF90014EFF7 /* Config.xcconfig */,
 				8A4565C0238C3BCB0014EFF7 /* Bugsnag.hpp */,
 				8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */,
