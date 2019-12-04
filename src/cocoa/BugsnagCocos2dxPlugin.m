@@ -4,7 +4,7 @@
 
 #import "BugsnagCocos2dxPlugin.h"
 
-NSString *const BUGSNAG_COCOS2DX_VERSION = @"0.1.0";
+NSString *const BUGSNAG_COCOS2DX_VERSION = @"0.3.0";
 
 @interface Bugsnag ()
 + (BugsnagNotifier *)notifier;
