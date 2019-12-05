@@ -6,6 +6,7 @@ Thanks for stopping by! This document should cover most topics surrounding contr
   * [Reporting issues](#reporting-issues)
   * [Fixing issues](#fixing-issues)
   * [Adding features](#adding-features)
+* [Architecture](#architecture)
 * [Building](#building)
 * [Releasing](#releasing)
 
@@ -41,6 +42,129 @@ Here’s a bit about our process designing and building the Bugsnag libraries:
 * We have an internal roadmap to plan out the features we build, and sometimes we will already be planning your suggested feature!
 * Our open source libraries span many languages and frameworks so we strive to ensure they are idiomatic on the given platform, but also consistent in terminology between platforms. That way the core concepts are familiar whether you adopt Bugsnag for one platform or many.
 * Finally, one of our goals is to ensure our libraries work reliably, even in crashy, multi-threaded environments. Oftentimes, this requires an intensive engineering design and code review process that adheres to our style and linting guidelines.
+
+## Architecture
+
+The bugsnag-cocos2dx package provides:
+
+* Native crash reporting for Android, iOS, and macOS
+* A "native" (Java/Objective-C) interface for initialization - capturing crashes
+  from the earliest moment after app launch
+* A C++ interface for logging breadcrumb, reporting non-fatal errors, recording
+  report diagnostics, and session management
+
+Since there is no holistic package management solution for either Cocos2d or
+mobile/desktop platforms, bugsnag-cocos2dx is distributed as a zip file
+containing a linkable package for Android, iOS, and macOS in the following
+structure:
+
+```
+bugsnag/
+├── CMakeLists.txt
+├── android
+│   ├── Bugsnag.cpp
+│   ├── bugsnag-plugin-android-cocos2dx
+│   │   ├── build.gradle
+│   │   └── src/main
+│   │           ├── AndroidManifest.xml
+│   │           └── java/com/bugsnag/android/BugsnagCocos2dxPlugin.kt
+│   ├── libs
+│   │   ├── bugsnag-android-core.aar
+│   │   ├── bugsnag-android.aar
+│   │   ├── bugsnag-plugin-android-anr.aar
+│   │   └── bugsnag-plugin-android-ndk.aar
+│   └── private
+│       ├── bugsnag.h
+│       └── report.h
+├── cocoa
+│   ├── libbugsnag-cocos2dx-ios.a
+│   └── libbugsnag-cocos2dx-macosx.a
+└── include
+    └── BugsnagCocos2dx
+        ├── Bugsnag.hpp
+        └── cocoa
+            ├── BSG_KSCrashReportWriter.h
+            ├── Bugsnag.h
+            ├── BugsnagBreadcrumb.h
+            ├── BugsnagCocos2dxPlugin.h
+            ├── BugsnagConfiguration.h
+            ├── BugsnagCrashReport.h
+            ├── BugsnagMetaData.h
+            └── BugsnagPlugin.h
+
+```
+
+Each platform includes a plugin named "BugsnagCocos2dxPlugin", which is
+initialized prior to initializing a Bugsnag crash reporting package and provides
+Cocos2d-specific functionality.
+
+```java
+import com.bugsnag.android.BugsnagCocos2dxPlugin;
+import com.bugsnag.android.Bugsnag;
+
+public class AppActivity extends Cocos2dxActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // ...
+        BugsnagCocos2dxPlugin.register();
+        Bugsnag.init(this);
+    }
+}
+```
+
+```objc
+#import <BugsnagCocos2dx/cocoa/BugsnagCocos2dxPlugin.h>
+#import <BugsnagCocos2dx/cocoa/Bugsnag.h>
+
+int main(int argc, char *argv[]) {
+    [BugsnagCocos2dxPlugin registerWithCocos2dVersion:cocos2dVersion()];
+    [Bugsnag startBugsnagWithApiKey:@"YOUR-API-KEY-HERE"];
+
+    // ...
+}
+```
+
+### Android
+
+The Android package includes pre-compiled artifacts for bugsnag-android crash
+reporting, which are linked by the plugin package and transitively included in
+the host application. The host application must add a `flatDirs` repository to
+find them but otherwise does not need to interact with the artifacts themselves.
+
+The host application instead needs to identify and include the plugin package,
+which is included in the module-level gradle build configuration.
+
+The C++ interface is provided as a source file to link to the copy of
+Cocos2d-x being used in the application via CMake (the primary build system). It
+also links to the native components of bugsnag-plugin-android-ndk, to provide
+stacktrace collection for `notify()` (This is why there are `private` headers in
+the package).
+
+The C++ interface also provides a JNI method to return the version of Cocos2d-x
+being used to the Java-layer plugin, for inclusion in the runtime versions
+report diagnostics.
+
+### iOS / macOS
+
+The iOS / macOS package includes pre-compiled artifacts for the entire plugin,
+which includes bugsnag-cocoa in the static library binaries. The libraries are
+then linked by the host application and the interface is then provided through
+the `Bugsnag.hpp` header file. (Note: The iOS device and simulator libraries are
+built and then lipo-ed together into a single binary)
+
+The public bugsnag-cocoa headers are included with the library under a `cocoa`
+directory, since the two libraries are packaged into one.
+
+The Cocos2d-x version is passed in manually rather than linking to Cocos2d
+directly because of the difficulty in doing so in cocos2d v3.x, which would
+require library consumers to alter the installed Bugsnag package's Xcode project
+to point to the location of their cocos2d installation. This would make
+upgrading require more manual steps than deleting the package and adding a new
+one in its place. Going forward, cocos2d v4.x uses CMake to generate Xcode
+projects as a build artifact, so the package could instead use a similar
+approach to Android a load the version automatically in a distant future
+version.
 
 ## Building
 

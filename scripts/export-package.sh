@@ -23,7 +23,7 @@
 # └── include
 #     └── BugsnagCocos2dx
 #         ├── cocoa/{bugsnag-cocoa public headers}
-#         ├── BugsnagCocos2dxPlugin.h
+#         ├── cocoa/BugsnagCocos2dxPlugin.h
 #         └── Bugsnag.hpp
 
 PROJ_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
