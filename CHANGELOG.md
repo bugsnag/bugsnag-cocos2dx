@@ -1,5 +1,11 @@
 # Changelog
 
+## TBD
+
+### Bug Fixes
+
+* (Android) Fix warnings during compilation
+
 ## 0.3.0 (2019-12-04)
 
 ### Enhancements
