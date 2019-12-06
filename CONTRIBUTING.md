@@ -193,6 +193,15 @@ To update `bugsnag-cocoa` or `bugsnag-android`, open each directory in a
 terminal and run `git fetch` then `git checkout {tag name}`. Commit the change
 with an update to the changelog with the new fixes and features.
 
+On Android, there are additional declared dependencies in
+`src/android/bugsnag-plugin-android-cocos2dx` which must be synchronized with
+the versions used in `bugsnag-android/gradle/dependencies.gradle`, to ensure
+that the library compiles correctly and runs in the host application. At the
+time of writing, these are:
+
+* kotlin-stdlib
+* androidx.annotation
+
 ### Making the release
 
 1. Update the changelog with new features and fixes

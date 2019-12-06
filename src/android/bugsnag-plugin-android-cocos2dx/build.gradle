@@ -31,6 +31,9 @@ dependencies {
     // the bugsnag-plugin-android-* libs share this runtime dependency.
     api "org.jetbrains.kotlin:kotlin-stdlib:1.3.21"
 
+    // bugsnag-android libs use this runtime dependency
+    implementation "androidx.annotation:annotation:1.1.0"
+
     runtimeOnly(name:'bugsnag-android', ext:'aar')
     api(name:'bugsnag-android-core', ext:'aar')
     api(name:'bugsnag-plugin-android-ndk', ext:'aar')
