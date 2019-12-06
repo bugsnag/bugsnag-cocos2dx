@@ -20,6 +20,7 @@ public class BugsnagCocos2dxPlugin : BugsnagPlugin {
     }
 
     override fun loadPlugin(client: Client) {
+        configureNativeComponents()
         client.enableNdkCrashReporting()
         client.config.beforeSend { report ->
             report.notifier.name = "Bugsnag Cocos2d-x"
@@ -49,5 +50,7 @@ public class BugsnagCocos2dxPlugin : BugsnagPlugin {
         return runtimeVersions
     }
 
-    external fun getCocos2dVersion(): String
+    private external fun getCocos2dVersion(): String
+
+    private external fun configureNativeComponents()
 }

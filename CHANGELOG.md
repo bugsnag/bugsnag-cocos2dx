@@ -7,6 +7,9 @@
 * (Android) Fix warnings during compilation
 * (Android) Fix missing build dependency if the Bugsnag plugin is initialized
   prior to the cocos2d module
+* (Android) Fix starting, stopping, resuming sessions manually so they actually
+  do something
+* (Android) Improve runtime performance by caching references in JNI hot paths
 
 ## 0.3.0 (2019-12-04)
 
