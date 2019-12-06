@@ -1,5 +1,11 @@
 # Changelog
 
+## TBD
+
+### Bug fixes
+
+* (iOS) Fix out-of-memory errors not being detected
+
 ## 0.3.1 (2019-12-06)
 
 ### Bug Fixes
