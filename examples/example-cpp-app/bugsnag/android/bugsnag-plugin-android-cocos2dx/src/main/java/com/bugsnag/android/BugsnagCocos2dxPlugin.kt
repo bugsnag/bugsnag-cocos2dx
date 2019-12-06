@@ -20,6 +20,7 @@ public class BugsnagCocos2dxPlugin : BugsnagPlugin {
     }
 
     override fun loadPlugin(client: Client) {
+        configureNativeComponents()
         client.enableNdkCrashReporting()
         client.config.beforeSend { report ->
             report.notifier.name = "Bugsnag Cocos2d-x"
@@ -27,7 +28,7 @@ public class BugsnagCocos2dxPlugin : BugsnagPlugin {
             report.notifier.setURL("https://github.com/bugsnag/bugsnag-cocos2dx")
 
             var runtimeVersions = getRuntimeVersions(report)
-            runtimeVersions.set("cocos2dx", version as Object)
+            runtimeVersions.set("cocos2dx", version)
             true
         }
         Logger.info("Initialized Cocos2d-x plugin " + BuildConfig.VERSION_NAME);
@@ -38,16 +39,18 @@ public class BugsnagCocos2dxPlugin : BugsnagPlugin {
 
     }
 
-    private fun getRuntimeVersions(report: Report): MutableMap<String, Object> {
+    private fun getRuntimeVersions(report: Report): MutableMap<Any, Any> {
         val device = report.getError().getDeviceData()
         var runtimeVersions = device.get("runtimeVersions")
         if (runtimeVersions is MutableMap<*, *>) {
-            return runtimeVersions as MutableMap<String, Object>
+            return runtimeVersions as MutableMap<Any, Any>
         }
-        runtimeVersions = HashMap<String, Object>()
+        runtimeVersions = HashMap<Any, Any>()
         device.set("runtimeVersions", runtimeVersions)
         return runtimeVersions
     }
 
-    external fun getCocos2dVersion(): String
+    private external fun getCocos2dVersion(): String
+
+    private external fun configureNativeComponents()
 }
