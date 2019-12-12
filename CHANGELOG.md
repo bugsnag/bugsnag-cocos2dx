@@ -5,6 +5,8 @@
 ### Bug fixes
 
 * (Android) Suppress erroneous unchecked cast warning
+* (Android) Fix possible crash in release mode due to obfuscating classes used
+  by the JNI
 
 ## 0.3.2 (2019-12-09)
 
