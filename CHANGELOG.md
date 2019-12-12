@@ -1,5 +1,11 @@
 # Changelog
 
+## TBD
+
+### Bug fixes
+
+* (Android) Suppress erroneous unchecked cast warning
+
 ## 0.3.2 (2019-12-09)
 
 ### Bug fixes

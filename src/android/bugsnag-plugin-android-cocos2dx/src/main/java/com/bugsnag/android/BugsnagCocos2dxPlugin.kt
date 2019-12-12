@@ -43,6 +43,10 @@ public class BugsnagCocos2dxPlugin : BugsnagPlugin {
         val device = report.getError().getDeviceData()
         var runtimeVersions = device.get("runtimeVersions")
         if (runtimeVersions is MutableMap<*, *>) {
+            // This cast is actually checked (above), though there's no direct
+            // way to infer the types of the map so automatic type coercion
+            // doesn't apply here.
+            @Suppress("UNCHECKED_CAST")
             return runtimeVersions as MutableMap<Any, Any>
         }
         runtimeVersions = HashMap<Any, Any>()
