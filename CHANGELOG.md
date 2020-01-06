@@ -1,6 +1,6 @@
 # Changelog
 
-## TBD
+## 0.3.4 (2020-01-06)
 
 ### Bug fixes
 
