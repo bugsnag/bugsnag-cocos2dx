@@ -5,11 +5,9 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:3.4.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21"
     }
 }
 apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
 
 android {
     compileSdkVersion 28
@@ -27,9 +25,8 @@ repositories {
 }
 
 dependencies {
-    // Plugin source is in kotlin and uses stdlib functions. In addition,
-    // the bugsnag-plugin-android-* libs share this runtime dependency.
-    api "org.jetbrains.kotlin:kotlin-stdlib:1.3.21"
+    // Runtime dependency of the bugsnag-plugin-android-* dependencies
+    api "org.jetbrains.kotlin:kotlin-stdlib:1.3.61"
 
     // bugsnag-android libs use this runtime dependency
     implementation "androidx.annotation:annotation:1.1.0"

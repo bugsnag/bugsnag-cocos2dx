@@ -1,5 +1,15 @@
 # Changelog
 
+## TBD
+
+### Bug fixes
+
+* (Android) Bump the bugsnag-android dependency version to v4.22.2
+* (Android) Remove use of the Kotlin Gradle plugin - the version previously in
+  use used deprecated APIs, emitting a warning. Updating to the latest version
+  caused a Gradle version conflict with stock installs of Cocos2d-x 3.x, so
+  removing the plugin altogether was easier than resolving the conflict.
+
 ## 0.3.3 (2019-12-12)
 
 ### Bug fixes
