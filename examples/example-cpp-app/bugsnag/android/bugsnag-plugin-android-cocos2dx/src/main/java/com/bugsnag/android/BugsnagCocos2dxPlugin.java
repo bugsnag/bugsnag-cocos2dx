@@ -41,25 +41,37 @@ public class BugsnagCocos2dxPlugin implements BugsnagPlugin {
 
     @Override
     public void loadPlugin(Client client) {
+        configureNotifierDetails();
         configureNativeComponents();
         client.enableNdkCrashReporting();
         client.getConfig().beforeSend(new BeforeSend() {
             @Override
             public boolean run(Report report) {
-                report.getNotifier().setName("Bugsnag Cocos2d-x");
-                report.getNotifier().setVersion(BuildConfig.VERSION_NAME);
-                report.getNotifier().setURL("https://github.com/bugsnag/bugsnag-cocos2dx");
-
-                Map<String, Object> runtimeVersions = getRuntimeVersions(report);
+                Map<String, Object> runtimeVersions = 
+                    getRuntimeVersions(report.getError().getDeviceData());
                 runtimeVersions.put("cocos2dx", version);
             return true;
             }
         });
+        client.getConfig().addBeforeSendSession(new BeforeSendSession() {
+            @Override
+            public void beforeSendSession(SessionTrackingPayload payload) {
+                Map<String, Object> runtimeVersions = getRuntimeVersions(payload.getDevice());
+                runtimeVersions.put("cocos2dx", version);
+            }
+        });
+
         Logger.info("Initialized Cocos2d-x plugin " + BuildConfig.VERSION_NAME);
     }
 
-    private Map<String, Object>getRuntimeVersions(Report report) {
-        Map<String, Object> device = report.getError().getDeviceData();
+    private void configureNotifierDetails() {
+        Notifier notifier = Notifier.getInstance();
+        notifier.setName("Bugsnag Cocos2d-x");
+        notifier.setVersion(BuildConfig.VERSION_NAME);
+        notifier.setURL("https://github.com/bugsnag/bugsnag-cocos2dx");
+    }
+
+    private Map<String, Object>getRuntimeVersions(Map<String, Object> device) {
         Object runtimeVersions = device.get("runtimeVersions");
         if (runtimeVersions instanceof Map) {
             @SuppressWarnings("unchecked")
