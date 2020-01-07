@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0 (2020-01-07)
+
+First public release! Supports automatic crash reporting on Android, iOS, and
+macOS for Cocos2d-x apps written in C++. Requires Cocos2d-x 3.1 and above. To
+get started, see the [integration guide](https://docs.bugsnag.com/platforms/cocos2dx).
+
 ## 0.3.5 (2020-01-07)
 
 ### Bug fixes
