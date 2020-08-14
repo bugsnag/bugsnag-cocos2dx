@@ -1,39 +1,44 @@
 ---
 name: Bug report
 about: Create a report to help us improve the library
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
-### Description
-<!-- A quick description of what you're trying to accomplish -->
+<!-- Before raising, please check if somebody else has already reported your issue. -->
 
-### Issue
-<!--
-  What went wrong?
--->
+### Describe the bug
+A clear and concise description of what the bug is.
+
+### Steps to reproduce
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
 ### Environment
-
-- Cocos2d-x version: 
-- iOS/Android version(s):
-- simulator/emulator or physical device?:
-- debug mode or production?:
+* Bugsnag version:
+* XCode version (if any):
+* iOS/macOS/Android version:
+* Simulator or device:
 
 <!--
   Below are a few approaches you might take to communicate the issue, in
   descending order of awesomeness. Please choose one and feel free to delete
   the others from this template.
 -->
-### Example Repo
 
-- [ ] Create a minimal repository that can reproduce the issue after running
-  `cocos run -p [android|ios]`
+### Example Repo <!-- Option 1 -->
+
+- [ ] Create a minimal repository that can reproduce the issue
 - [ ] Link to it here:
 
-### Example code snippet
+### Example code snippet <!-- Option 2 -->
 
-```cpp
-// (Insert code sample to reproduce the problem)
+```
+# (Insert code sample to reproduce the problem)
 ```
 
 <!-- Error messages, if any -->

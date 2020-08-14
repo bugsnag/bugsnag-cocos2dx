@@ -1,18 +1,16 @@
 ## Goal
 
-<!-- What is the intent of this change? -->
+<!-- Why is this change necessary? -->
+
+## Design
+
+<!-- Why was this approach used? -->
 
 ## Changeset
 
-<!-- What structures or properties or functions were added/removed/changed? -->
+<!-- What changed? -->
 
-## Tests
+## Testing
 
-<!-- How was this change tested? What manual and automated tests were
+<!-- How was it tested? What manual and automated tests were
      run/added? -->
-
-## Discussion
-
-### Linked issues
-
-<!-- Fixes #XXX -->
