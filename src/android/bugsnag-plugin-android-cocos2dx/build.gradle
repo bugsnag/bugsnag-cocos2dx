@@ -1,10 +1,10 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.4.1"
+        classpath "com.android.tools.build:gradle:4.2.1"
     }
 }
 apply plugin: "com.android.library"
@@ -15,6 +15,7 @@ android {
     defaultConfig {
         minSdkVersion 16 // Minimum version supported by Cocos2dx
         versionName '1.0.0'
+        ndkVersion = "16.1.4479499"
     }
 }
 
