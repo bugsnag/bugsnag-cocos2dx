@@ -8,6 +8,7 @@ android {
         targetSdkVersion PROP_TARGET_SDK_VERSION
         versionCode 1
         versionName "1.0"
+        ndkVersion = "16.1.4479499"
     }
 
     sourceSets.main {
