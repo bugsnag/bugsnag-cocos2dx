@@ -10,10 +10,7 @@ os: osx
 osx_image: xcode13.1
 
 before_install:
-- brew update
-- brew tap AdoptOpenJDK/openjdk
-- brew install --cask homebrew/cask-versions/adoptopenjdk8
-- brew install --cask android-sdk
+- brew install --cask android-commandlinetools
 - brew install jq ninja
 
 # Better reliability from Android builds
@@ -28,8 +25,8 @@ cache:
 env:
   global:
   - HOMEBREW_NO_INSTALL_CLEANUP=1
-  - ANDROID_HOME=/usr/local/share/android-sdk
-  - ANDROID_SDK_ROOT=/usr/local/share/android-sdk
+  - ANDROID_HOME=/usr/local/share/android-commandlinetools
+  - ANDROID_SDK_ROOT=/usr/local/share/android-commandlinetools
   - ANDROID_NDK_HOME=/usr/local/share/android-ndk
   - TERM=dumb # Stop interactive gradle output
 
