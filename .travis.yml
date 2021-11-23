@@ -33,8 +33,9 @@ env:
 # Configure android build
 before_script:
 #- yes | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-28" > /dev/null
-- yes | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-28"
-- yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses > /dev/null
+
+- yes | $ANDROID_HOME/cmdline-tools/homebrew/bin/sdkmanager "platforms;android-28"
+- yes | $ANDROID_HOME/cmdline-tools/homebrew/bin/sdkmanager --licenses > /dev/null
 - curl --silent -o ndk.zip https://dl.google.com/android/repository/android-ndk-r16b-darwin-x86_64.zip
 - unzip -qq ndk.zip > /dev/null
 - rm ndk.zip
