@@ -7,7 +7,7 @@ os: osx
 # >  In practical terms, if your Mac build requires Java 8 and below, use
 # xcode9.3 (or below); if your build requires Java 10 and later, use xcode9.4
 # (or later).
-osx_image: Xcode 13.1
+osx_image: xcode13.1
 
 before_install:
 - brew update
