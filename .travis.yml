@@ -68,3 +68,4 @@ jobs:
       draft: true
       on:
         tags: true
+
