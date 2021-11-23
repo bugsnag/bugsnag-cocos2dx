@@ -23,6 +23,7 @@ cocos2d/cocos/platform/android/java/res/
 .metadata/
 .recommenders/
 .gradle/
+.android/
 
 # proj.android-studio
 .idea/
