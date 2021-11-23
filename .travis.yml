@@ -12,8 +12,8 @@ osx_image: xcode13.1
 before_install:
 - brew update
 - brew tap AdoptOpenJDK/openjdk
-- brew cask install homebrew/cask-versions/adoptopenjdk8
-- brew cask install android-sdk
+- brew install --cask homebrew/cask-versions/adoptopenjdk8
+- brew install --cask android-sdk
 - brew install jq ninja
 
 # Better reliability from Android builds
