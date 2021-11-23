@@ -1,15 +1,18 @@
 language: objective-c
 os: osx
 
-# Using Xcode 9.3 to get Java 8, based on the build matrix in 
+# Using Xcode 9.3 to get Java 8, based on the build matrix in
 # https://docs.travis-ci.com/user/reference/osx/#jdk-and-macos
 #
 # >  In practical terms, if your Mac build requires Java 8 and below, use
 # xcode9.3 (or below); if your build requires Java 10 and later, use xcode9.4
 # (or later).
-osx_image: xcode9.3 
+osx_image: Xcode 13.1
 
 before_install:
+- brew update
+- brew tap AdoptOpenJDK/openjdk
+- brew cask install homebrew/cask-versions/adoptopenjdk8
 - brew cask install android-sdk
 - brew install jq ninja
 
@@ -26,12 +29,14 @@ env:
   global:
   - HOMEBREW_NO_INSTALL_CLEANUP=1
   - ANDROID_HOME=/usr/local/share/android-sdk
+  - ANDROID_SDK_ROOT=/usr/local/share/android-sdk
   - ANDROID_NDK_HOME=/usr/local/share/android-ndk
   - TERM=dumb # Stop interactive gradle output
 
 # Configure android build
 before_script:
-- yes | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-28" > /dev/null
+#- yes | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-28" > /dev/null
+- yes | $ANDROID_HOME/tools/bin/sdkmanager "platforms;android-28"
 - yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses > /dev/null
 - curl --silent -o ndk.zip https://dl.google.com/android/repository/android-ndk-r16b-darwin-x86_64.zip
 - unzip -qq ndk.zip > /dev/null
@@ -47,7 +52,7 @@ jobs:
   include:
   - stage: test
     name: Build and test package
-    script: 
+    script:
     - xcodebuild -quiet -sdk macosx -project src/cocoa/BugsnagCocos2dx.xcodeproj -scheme BugsnagCocos2dx clean test -derivedDataPath build/tests/mac
     - xcodebuild -quiet -sdk iphonesimulator -project src/cocoa/BugsnagCocos2dx.xcodeproj -scheme BugsnagCocos2dx -destination 'platform=iOS Simulator,OS=11.3,name=iPhone X' clean test -derivedDataPath build/tests/ios
     - ./scripts/export-package.sh
@@ -58,7 +63,7 @@ jobs:
       provider: releases
       file: $TRAVIS_BUILD_DIR/build/bugsnag-cocos2dx.zip
       skip_cleanup: true
-      token: 
+      token:
         secure: EqkAxzz7v39EJVCwHzR7HKilMIiMHUeIk4+f0YL7b6l8k2LiWSHOPmwnbMlG3/58gSIICIEiR8j5I6PWIFRgpSQBF8nXo1y+QMIYOPHaMA4ZnAZC01hbKkEh86HYWhqETy2N/yvI4rRr7/ROMaEtx03l7o1V5VeDLio3SArp5BlZfw2vqQhqJlTbw8lsYagWNVCSyKww4cRqNLyEd055OnOuCoxk9dxPBoK0yoWkREEaJFgoyHgyXMNJcuoZ6qXaWHJ01dLoi8EjHXRfJXdBS/jUM8MOz1Y2YKtfKB4WhuAgd/yZ29Vue6qY0ZShAXveOZNqwOddic5t/i56gy56MzvE41JPOmpTruoK6xlE/Hq5qeOgvJK80tq5ByjmcdFxb9Psg97Q1JhouazfFg/5EtJCqJkF0T4BRv1s9yCemgFqw1P0S8B4gWF3cso0uzkU5GsFbRX+OOoOXnit0LKEuJfUokF1jDY02qfoec++gKwrLz6Exe2lsA3ijiUjWw4rpZ4p0MkswVxqO0Mm89MLUB3Pj9svGP9QtwHQ6IZX1DrAuuwDbZf4Fkz/v2K8Nk3Cl6lZ/4J7f+Qf8BGNUom09vFyLFIskIny/5hyfdMsNKsdRwKvddgZiXR8BBZ3pqCa0ZCx9D74BaTzyXpdis1N89j8J9rEgHg1fh2UcLeEdlQ=
       draft: true
       on:
