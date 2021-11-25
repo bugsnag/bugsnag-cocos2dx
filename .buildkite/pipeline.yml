@@ -1,0 +1,35 @@
+agents:
+  queue: opensource-mac-cocoa-10.15
+
+steps:
+  - name: 'Run macOS unit tests'
+    timeout_in_minutes: 10
+    commands:
+      - xcodebuild
+        -quiet
+        -sdk macosx
+        -project src/cocoa/BugsnagCocos2dx.xcodeproj
+        -scheme BugsnagCocos2dx clean test -derivedDataPath build/tests/mac
+
+  - name: 'Run iOS unit tests'
+    timeout_in_minutes: 10
+    commands:
+      - xcodebuild
+        -quiet
+        -sdk iphonesimulator
+        -project src/cocoa/BugsnagCocos2dx.xcodeproj
+        -scheme BugsnagCocos2dx
+        -destination 'platform=iOS Simulator,OS=13.7,name=iPhone 11 Pro'
+        clean
+        test
+        -derivedDataPath build/tests/ios
+
+  - wait
+
+  - name: 'Build package'
+    timeout_in_minutes: 20
+    plugins:
+      artifacts#v1.4.0:
+        upload: "build/bugsnag-cocos2dx.zip"
+    commands:
+      - ./scripts/export-package.sh
