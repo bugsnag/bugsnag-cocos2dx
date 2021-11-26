@@ -16,6 +16,11 @@ android {
         minSdkVersion 16 // Minimum version supported by Cocos2dx
         versionName '1.0.0'
         ndkVersion = "16.1.4479499"
+
+        // build config doesn't automatically include these values anymore but they're used
+        // by the cocos2dx plugin - add them manually
+        buildConfigField 'int', 'VERSION_CODE', "1"
+        buildConfigField 'String', 'VERSION_NAME', "\"1.0.0\""
     }
 }
 
