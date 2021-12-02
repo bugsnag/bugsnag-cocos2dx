@@ -50,10 +50,11 @@ install "$PROJ_DIR"/src/CMakeLists.txt "$PROJ_DIR"/build/pkg/
 echo "Assembling android artifacts..."
 mkdir -p "$PROJ_DIR"/build/android
 pushd src/android/bugsnag-android
-    ./gradlew --quiet bugsnag-android-core:assembleRelease
-    ./gradlew --quiet bugsnag-plugin-android-ndk:assembleRelease
-    ./gradlew --quiet bugsnag-plugin-android-anr:assembleRelease
-    ./gradlew --quiet bugsnag-android:assembleRelease
+GRADLE="./gradlew --quiet -PABI_FILTERS=x86,x86_64,armeabi-v7a,arm64-v8a"
+    $GRADLE bugsnag-android-core:assembleRelease
+    $GRADLE bugsnag-plugin-android-ndk:assembleRelease
+    $GRADLE bugsnag-plugin-android-anr:assembleRelease
+    $GRADLE bugsnag-android:assembleRelease
 popd
 
 ANDROID_ARTIFACTS=$(ls "$PROJ_DIR"/src/android/bugsnag-android/bugsnag-*/build/outputs/aar/bugsnag-{android,android-core,plugin-*}-release.aar)
