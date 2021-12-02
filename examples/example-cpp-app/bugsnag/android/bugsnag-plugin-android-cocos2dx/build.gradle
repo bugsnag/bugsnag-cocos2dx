@@ -14,7 +14,6 @@ android {
 
     defaultConfig {
         minSdkVersion 16 // Minimum version supported by Cocos2dx
-        ndkVersion = "16.1.4479499"
 
         // manually specify removed BuildConfig.VERSION_NAME field
         // https://developer.android.com/studio/releases/gradle-plugin#version_properties_removed_from_buildconfig_class_in_library_projects
