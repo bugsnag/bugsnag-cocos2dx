@@ -1,5 +1,11 @@
 # Changelog
 
+## TBD
+
+### Enhancements
+
+* Backport `persistenceDirectory` config option to Android [bugsnag-cocos2dx#6](https://github.com/bugsnag/bugsnag-cocos2dx/pull/6)
+
 ## 1.0.0 (2020-01-07)
 
 First public release! Supports automatic crash reporting on Android, iOS, and
