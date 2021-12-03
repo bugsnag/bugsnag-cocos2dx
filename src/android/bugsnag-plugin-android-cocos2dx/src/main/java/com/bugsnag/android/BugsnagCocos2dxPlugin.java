@@ -9,7 +9,7 @@ public class BugsnagCocos2dxPlugin implements BugsnagPlugin {
     private static String version = null;
 
     /** Release version of the bugsnag cocos2d-x plugin */
-    private static String pluginVersion = "1.0.0";
+    private static String pluginVersion = "1.1.0";
 
     private boolean loaded = false;
 
