@@ -1,10 +1,15 @@
 # Changelog
 
-## TBD
+## 1.1.0 (2021-12-06)
 
 ### Enhancements
 
 * Backport `persistenceDirectory` config option to Android [bugsnag-cocos2dx#6](https://github.com/bugsnag/bugsnag-cocos2dx/pull/6)
+
+### Bug fixes
+
+* (Android) Bump the bugsnag-android dependency version to v4.22.3
+* (Android) Fix UTF-8 encoding errors in Bugsnag::notify [bugsnag-android#1542](https://github.com/bugsnag/bugsnag-android/pull/1542)
 
 ## 1.0.0 (2020-01-07)
 
