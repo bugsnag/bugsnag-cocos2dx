@@ -4,10 +4,17 @@ if(ANDROID OR APPLE) # Supports Android, iOS, and macOS
 
 set(BUGSNAG_LIB bugsnag-cocos2dx)
 project(${BUGSNAG_LIB})
+set(EXTRA_LINKING_FLAGS "")
 
 if(ANDROID)
     add_library(${BUGSNAG_LIB} STATIC android/Bugsnag.cpp)
-    target_include_directories(${BUGSNAG_LIB} 
+    set(EXTRA_LINKING_FLAGS
+        # Ensure JNI functions are exported from the host shared library, in
+        # case the host is configured to hide all symbols through linker options
+        -uJava_com_bugsnag_android_BugsnagCocos2dxPlugin_getCocos2dVersion
+        -uJava_com_bugsnag_android_BugsnagCocos2dxPlugin_configureNativeComponents)
+
+    target_include_directories(${BUGSNAG_LIB}
         PUBLIC include
         PRIVATE android/private)
     target_link_libraries(${BUGSNAG_LIB} cocos2d)
@@ -35,4 +42,6 @@ endif()
 set_target_properties(${BUGSNAG_LIB} PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/bugsnag/include)
 
+# Export settings into parent project
+set(BUGSNAG_LINKER_FLAGS ${EXTRA_LINKING_FLAGS} PARENT_SCOPE)
 endif()

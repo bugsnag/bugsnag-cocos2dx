@@ -3,12 +3,13 @@ package com.bugsnag.android;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.bugsnag.android.cocos2dx.BuildConfig;
-
 public class BugsnagCocos2dxPlugin implements BugsnagPlugin {
 
     /** Formatted, cached copy of the cocos2d version */
     private static String version = null;
+
+    /** Release version of the bugsnag cocos2d-x plugin */
+    private static String pluginVersion = "1.1.0";
 
     private boolean loaded = false;
 
@@ -61,13 +62,13 @@ public class BugsnagCocos2dxPlugin implements BugsnagPlugin {
             }
         });
 
-        Logger.info("Initialized Cocos2d-x plugin " + BuildConfig.VERSION_NAME);
+        Logger.info("Initialized Cocos2d-x plugin " + pluginVersion);
     }
 
     private void configureNotifierDetails() {
         Notifier notifier = Notifier.getInstance();
         notifier.setName("Bugsnag Cocos2d-x");
-        notifier.setVersion(BuildConfig.VERSION_NAME);
+        notifier.setVersion(pluginVersion);
         notifier.setURL("https://github.com/bugsnag/bugsnag-cocos2dx");
     }
 
