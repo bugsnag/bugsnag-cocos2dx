@@ -1,10 +1,17 @@
 # Changelog
 
-## TBD
+## 1.1.0 (2021-12-06)
 
 ### Enhancements
 
 * Backport `persistenceDirectory` config option to Android [bugsnag-cocos2dx#6](https://github.com/bugsnag/bugsnag-cocos2dx/pull/6)
+
+### Bug fixes
+
+* (Android) Fix UTF-8 encoding errors in Bugsnag::notify [bugsnag-android#1542](https://github.com/bugsnag/bugsnag-android/pull/1542)
+* Update bugsnag-android to v4.22.3
+  * Allow disabling previous signal handler invocation for Unity ANRs [bugsnag-android#743]
+  * Avoid polling when detecting ANRs by invoking JNI from SIGQUIT handler [bugsnag-android#741]
 
 ## 1.0.0 (2020-01-07)
 
