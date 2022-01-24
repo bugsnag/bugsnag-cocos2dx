@@ -1,6 +1,13 @@
 #import <XCTest/XCTest.h>
 #import <BugsnagCocos2dx/cocoa/BugsnagCocos2dxPlugin.h>
 
+// Fake a cocos2d library function to satisfy the linker
+namespace cocos2d {
+    const char* cocos2dVersion() {
+        return "cocos2d-x-3.17.2";
+    }
+}
+
 @interface BugsnagCocos2dxPlugin ()
 + (NSString *)parseCocos2dVersion:(const char *)rawVersion;
 @end

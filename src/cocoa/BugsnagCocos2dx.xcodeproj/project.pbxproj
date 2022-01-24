@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A3C591B2396DB2600B344AA /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C591A2396DB2600B344AA /* Tests.m */; };
+		8A3C591B2396DB2600B344AA /* Tests.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A3C591A2396DB2600B344AA /* Tests.mm */; };
 		8A3C591D2396DB2600B344AA /* libBugsnagCocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4565AF238C394E0014EFF7 /* libBugsnagCocos2dx.a */; };
 		8A3C59262396E3E400B344AA /* BugsnagCocos2dxPlugin.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3C590E239687D600B344AA /* BugsnagCocos2dxPlugin.h */; };
 		8A3C59282396EBAD00B344AA /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3C59272396EBAD00B344AA /* libc++.tbd */; };
 		8A4565C2238C3BCB0014EFF7 /* Bugsnag.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */; };
-		8A4565D0238C3BF80014EFF7 /* libBugsnagStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4565CE238C3BEA0014EFF7 /* libBugsnagStatic.a */; };
 		8A4565D1238C3C130014EFF7 /* Bugsnag.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4565C0238C3BCB0014EFF7 /* Bugsnag.hpp */; };
-		8A72A02C239571A100328051 /* BugsnagCocos2dxPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.m */; };
+		8A72A02C239571A100328051 /* BugsnagCocos2dxPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.mm */; };
+		CBE8ED2F279ED0460081F2A2 /* libBugsnagStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB625C4B279AD6FF00E51893 /* libBugsnagStatic.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,33 +25,61 @@
 			remoteGlobalIDString = 8A4565AE238C394E0014EFF7;
 			remoteInfo = BugsnagCocos2dx;
 		};
-		8A4565C9238C3BEA0014EFF7 /* PBXContainerItemProxy */ = {
+		CB625C44279AD6FF00E51893 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8A2C8F181C6BBD2300846019;
-			remoteInfo = Bugsnag;
+			remoteGlobalIDString = 00AD1C7224869B0E00A27979;
+			remoteInfo = "Bugsnag-iOS";
 		};
-		8A4565CB238C3BEA0014EFF7 /* PBXContainerItemProxy */ = {
+		CB625C46279AD6FF00E51893 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 8A2C8F221C6BBD2300846019;
-			remoteInfo = Tests;
+			remoteGlobalIDString = 00AD1CAD24869C1200A27979;
+			remoteInfo = "Bugsnag-macOS";
 		};
-		8A4565CD238C3BEA0014EFF7 /* PBXContainerItemProxy */ = {
+		CB625C48279AD6FF00E51893 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = E7397DC41F83BAC50034242A;
+			remoteGlobalIDString = 00AD1CC924869C2400A27979;
+			remoteInfo = "Bugsnag-tvOS";
+		};
+		CB625C4A279AD6FF00E51893 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00AD1CE424869C6C00A27979;
 			remoteInfo = BugsnagStatic;
 		};
-		8A4565D2238C3D660014EFF7 /* PBXContainerItemProxy */ = {
+		CB625C4C279AD6FF00E51893 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = E7397DC31F83BAC50034242A;
-			remoteInfo = BugsnagStatic;
+			proxyType = 2;
+			remoteGlobalIDString = 00AD1C7B24869B0E00A27979;
+			remoteInfo = "Bugsnag-iOSTests";
+		};
+		CB625C4E279AD6FF00E51893 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00AD1CB524869C1200A27979;
+			remoteInfo = "Bugsnag-macOSTests";
+		};
+		CB625C50279AD6FF00E51893 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 00AD1CD124869C2400A27979;
+			remoteInfo = "Bugsnag-tvOSTests";
+		};
+		CB625C52279AD6FF00E51893 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 01A6176B2733CFEA00024A0B;
+			remoteInfo = "TestHost-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -81,15 +109,15 @@
 /* Begin PBXFileReference section */
 		8A3C590E239687D600B344AA /* BugsnagCocos2dxPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BugsnagCocos2dxPlugin.h; sourceTree = "<group>"; };
 		8A3C59182396DB2600B344AA /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A3C591A2396DB2600B344AA /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		8A3C591A2396DB2600B344AA /* Tests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Tests.mm; sourceTree = "<group>"; };
 		8A3C591C2396DB2600B344AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A3C59272396EBAD00B344AA /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
 		8A4565AF238C394E0014EFF7 /* libBugsnagCocos2dx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBugsnagCocos2dx.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A4565C0238C3BCB0014EFF7 /* Bugsnag.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Bugsnag.hpp; path = ../Bugsnag.hpp; sourceTree = "<group>"; };
 		8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bugsnag.mm; sourceTree = "<group>"; };
-		8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bugsnag.xcodeproj; path = "bugsnag-cocoa/iOS/Bugsnag.xcodeproj"; sourceTree = "<group>"; };
-		8A4565D4238C3FF90014EFF7 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = "bugsnag-cocoa/Configurations/Config.xcconfig"; sourceTree = "<group>"; };
-		8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BugsnagCocos2dxPlugin.m; sourceTree = "<group>"; };
+		8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bugsnag.xcodeproj; path = "bugsnag-cocoa/Bugsnag.xcodeproj"; sourceTree = "<group>"; };
+		8A4565D4238C3FF90014EFF7 /* Bugsnag.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Bugsnag.xcconfig; path = "bugsnag-cocoa/Bugsnag.xcconfig"; sourceTree = "<group>"; };
+		8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BugsnagCocos2dxPlugin.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A4565D0238C3BF80014EFF7 /* libBugsnagStatic.a in Frameworks */,
+				CBE8ED2F279ED0460081F2A2 /* libBugsnagStatic.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +144,7 @@
 		8A3C59192396DB2600B344AA /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				8A3C591A2396DB2600B344AA /* Tests.m */,
+				8A3C591A2396DB2600B344AA /* Tests.mm */,
 				8A3C591C2396DB2600B344AA /* Info.plist */,
 			);
 			path = Tests;
@@ -144,24 +172,14 @@
 		8A4565B1238C394E0014EFF7 /* BugsnagCocos2dx */ = {
 			isa = PBXGroup;
 			children = (
-				8A4565D4238C3FF90014EFF7 /* Config.xcconfig */,
+				8A4565D4238C3FF90014EFF7 /* Bugsnag.xcconfig */,
 				8A4565C0238C3BCB0014EFF7 /* Bugsnag.hpp */,
 				8A4565C1238C3BCB0014EFF7 /* Bugsnag.mm */,
 				8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */,
 				8A3C590E239687D600B344AA /* BugsnagCocos2dxPlugin.h */,
-				8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.m */,
+				8A72A02B239571A100328051 /* BugsnagCocos2dxPlugin.mm */,
 			);
 			name = BugsnagCocos2dx;
-			sourceTree = "<group>";
-		};
-		8A4565C4238C3BEA0014EFF7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8A4565CA238C3BEA0014EFF7 /* Bugsnag.framework */,
-				8A4565CC238C3BEA0014EFF7 /* Tests.xctest */,
-				8A4565CE238C3BEA0014EFF7 /* libBugsnagStatic.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		8A4565CF238C3BF80014EFF7 /* Frameworks */ = {
@@ -170,6 +188,21 @@
 				8A3C59272396EBAD00B344AA /* libc++.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB625C3A279AD6FF00E51893 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB625C45279AD6FF00E51893 /* Bugsnag.framework */,
+				CB625C47279AD6FF00E51893 /* Bugsnag.framework */,
+				CB625C49279AD6FF00E51893 /* Bugsnag.framework */,
+				CB625C4B279AD6FF00E51893 /* libBugsnagStatic.a */,
+				CB625C4D279AD6FF00E51893 /* Bugsnag-iOSTests.xctest */,
+				CB625C4F279AD6FF00E51893 /* Bugsnag-macOSTests.xctest */,
+				CB625C51279AD6FF00E51893 /* Bugsnag-tvOSTests.xctest */,
+				CB625C53279AD6FF00E51893 /* TestHost-iOS.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -206,7 +239,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8A4565D3238C3D660014EFF7 /* PBXTargetDependency */,
 			);
 			name = BugsnagCocos2dx;
 			productName = BugsnagCocos2dx;
@@ -243,7 +275,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 8A4565C4238C3BEA0014EFF7 /* Products */;
+					ProductGroup = CB625C3A279AD6FF00E51893 /* Products */;
 					ProjectRef = 8A4565C3238C3BEA0014EFF7 /* Bugsnag.xcodeproj */;
 				},
 			);
@@ -256,25 +288,60 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		8A4565CA238C3BEA0014EFF7 /* Bugsnag.framework */ = {
+		CB625C45279AD6FF00E51893 /* Bugsnag.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Bugsnag.framework;
-			remoteRef = 8A4565C9238C3BEA0014EFF7 /* PBXContainerItemProxy */;
+			remoteRef = CB625C44279AD6FF00E51893 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8A4565CC238C3BEA0014EFF7 /* Tests.xctest */ = {
+		CB625C47279AD6FF00E51893 /* Bugsnag.framework */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = Tests.xctest;
-			remoteRef = 8A4565CB238C3BEA0014EFF7 /* PBXContainerItemProxy */;
+			fileType = wrapper.framework;
+			path = Bugsnag.framework;
+			remoteRef = CB625C46279AD6FF00E51893 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		8A4565CE238C3BEA0014EFF7 /* libBugsnagStatic.a */ = {
+		CB625C49279AD6FF00E51893 /* Bugsnag.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Bugsnag.framework;
+			remoteRef = CB625C48279AD6FF00E51893 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB625C4B279AD6FF00E51893 /* libBugsnagStatic.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libBugsnagStatic.a;
-			remoteRef = 8A4565CD238C3BEA0014EFF7 /* PBXContainerItemProxy */;
+			remoteRef = CB625C4A279AD6FF00E51893 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB625C4D279AD6FF00E51893 /* Bugsnag-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Bugsnag-iOSTests.xctest";
+			remoteRef = CB625C4C279AD6FF00E51893 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB625C4F279AD6FF00E51893 /* Bugsnag-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Bugsnag-macOSTests.xctest";
+			remoteRef = CB625C4E279AD6FF00E51893 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB625C51279AD6FF00E51893 /* Bugsnag-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Bugsnag-tvOSTests.xctest";
+			remoteRef = CB625C50279AD6FF00E51893 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB625C53279AD6FF00E51893 /* TestHost-iOS.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "TestHost-iOS.app";
+			remoteRef = CB625C52279AD6FF00E51893 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -305,7 +372,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/usr/bin/env bash";
-			shellScript = "mkdir -p \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n\ninstall \"$SOURCE_ROOT/bugsnag-cocoa/Source/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagConfiguration.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagCrashReport.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagMetaData.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagBreadcrumb.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BSG_KSCrashReportWriter.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Source/BugsnagPlugin.h\" \\\n  \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n";
+			shellScript = "mkdir -p \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n\ninstall \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BSG_KSCrashReportWriter.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/Bugsnag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagApp.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagAppWithState.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagBreadcrumb.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagClient.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagConfiguration.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagDevice.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagDeviceWithState.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagEndpointConfiguration.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagError.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagErrorTypes.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagEvent.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagFeatureFlag.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagFeatureFlagStore.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagLastRunInfo.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagMetadata.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagMetadataStore.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagPlugin.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagSession.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagStackframe.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagThread.h\" \\\n  \"$SOURCE_ROOT/bugsnag-cocoa/Bugsnag/include/Bugsnag/BugsnagUser.h\" \\\n  \"$BUILT_PRODUCTS_DIR/include/BugsnagCocos2dx/cocoa\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -314,7 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A3C591B2396DB2600B344AA /* Tests.m in Sources */,
+				8A3C591B2396DB2600B344AA /* Tests.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A4565C2238C3BCB0014EFF7 /* Bugsnag.mm in Sources */,
-				8A72A02C239571A100328051 /* BugsnagCocos2dxPlugin.m in Sources */,
+				8A72A02C239571A100328051 /* BugsnagCocos2dxPlugin.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,17 +402,12 @@
 			target = 8A4565AE238C394E0014EFF7 /* BugsnagCocos2dx */;
 			targetProxy = 8A3C591E2396DB2600B344AA /* PBXContainerItemProxy */;
 		};
-		8A4565D3238C3D660014EFF7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BugsnagStatic;
-			targetProxy = 8A4565D2238C3D660014EFF7 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8A3C59202396DB2600B344AA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Config.xcconfig */;
+			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Bugsnag.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 372ZUL2ZB7;
@@ -357,13 +419,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bugsnag.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/bugsnag-cocoa/Bugsnag/include";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		8A3C59212396DB2600B344AA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Config.xcconfig */;
+			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Bugsnag.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 372ZUL2ZB7;
@@ -375,6 +438,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bugsnag.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = "$(SRCROOT)/bugsnag-cocoa/Bugsnag/include";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -430,8 +494,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(BUILD_DIR)/$(CONFIGURATION)/include";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -484,8 +548,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(BUILD_DIR)/$(CONFIGURATION)/include";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -495,27 +559,31 @@
 		};
 		8A4565B9238C394E0014EFF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Config.xcconfig */;
+			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Bugsnag.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 372ZUL2ZB7;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/bugsnag-cocoa/Bugsnag/include";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/bugsnag-cocoa/Bugsnag/**";
 			};
 			name = Debug;
 		};
 		8A4565BA238C394E0014EFF7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Config.xcconfig */;
+			baseConfigurationReference = 8A4565D4238C3FF90014EFF7 /* Bugsnag.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 372ZUL2ZB7;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SYSTEM_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/bugsnag-cocoa/Bugsnag/include";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/bugsnag-cocoa/Bugsnag/**";
 			};
 			name = Release;
 		};
