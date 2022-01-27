@@ -32,10 +32,10 @@ elseif(APPLE)
     add_library(${BUGSNAG_LIB} STATIC IMPORTED GLOBAL)
     if(MACOSX)
         set_target_properties(${BUGSNAG_LIB} PROPERTIES
-            IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/bugsnag/cocoa/libbugsnag-cocos2dx-macosx.a)
+            IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/bugsnag/cocoa/BugsnagCocos2dx.xcframework/macos-arm64_x86_64/libBugsnagCocos2dx.a)
     elseif(IOS)
         set_target_properties(${BUGSNAG_LIB} PROPERTIES
-            IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/bugsnag/cocoa/libbugsnag-cocos2dx-ios.a)
+            IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/bugsnag/cocoa/BugsnagCocos2dx.xcframework/ios-arm64_armv7/libBugsnagCocos2dx.a)
     endif()
 endif()
 

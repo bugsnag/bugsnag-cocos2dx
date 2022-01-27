@@ -1,5 +1,15 @@
 # Changelog
 
+## TBD
+
+### Enhancements
+
+* Updated to the latest Bugsnag Cocoa library. This brings a number of changes. Please see the updated docs at https://docs.bugsnag.com/platforms/cocos2dx/
+  - The cocoa library is now distributed as an xcframework.
+  - All required headers are also inside the xcframework, so it is no longer necessary to have custom header search paths.
+  - Initializing the Bugsnag Cocos2d-x plugin for Cocoa is now done using a similar API to the Bugsnag Cocoa library.
+  - The distributed zipfile now keeps everything inside a top-level "bugsnag" folder.
+
 ## 1.1.0 (2021-12-06)
 
 ### Enhancements
