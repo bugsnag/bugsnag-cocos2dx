@@ -30,6 +30,7 @@ namespace cocos2d {
     client.notifier.version = BUGSNAG_COCOS2DX_VERSION;
     client.notifier.name = @"Bugsnag Cocos2d-x";
     client.notifier.url = @"https://github.com/bugsnag/bugsnag-cocos2dx";
+    client.notifier.dependencies = [NSArray arrayWithObject:[[NSClassFromString(@"BugsnagNotifier") alloc] init]];
 }
 
 - (void)unload {
