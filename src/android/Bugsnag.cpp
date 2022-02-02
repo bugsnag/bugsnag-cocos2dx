@@ -223,7 +223,7 @@ JNIEXPORT void JNICALL Java_com_bugsnag_android_BugsnagCocos2dxPlugin_configureN
       "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
 
   bugsnag::BreadcrumbTypeClass = env->FindClass("com/bugsnag/android/BreadcrumbType");
-  _mapBreadcrumbType(env, bugsnag::Navigation, "ERROR");
+  _mapBreadcrumbType(env, bugsnag::Navigation, "NAVIGATION");
   _mapBreadcrumbType(env, bugsnag::Request, "REQUEST");
   _mapBreadcrumbType(env, bugsnag::Process, "PROCESS");
   _mapBreadcrumbType(env, bugsnag::Log, "LOG");
