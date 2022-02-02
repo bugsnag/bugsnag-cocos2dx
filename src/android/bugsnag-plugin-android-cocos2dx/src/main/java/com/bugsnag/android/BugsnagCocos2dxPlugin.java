@@ -17,7 +17,7 @@ public class BugsnagCocos2dxPlugin implements Plugin {
         notifier.setName("Bugsnag Cocos2d-x");
         notifier.setVersion(pluginVersion);
         notifier.setUrl("https://github.com/bugsnag/bugsnag-cocos2dx");
-        notifier.setDependencies(Arrays.asList(new Notifier())); // depend on bugsnag-android
+        notifier.setDependencies(Collections.singletonList(new Notifier())); // depend on bugsnag-android
 
         String[] versionComponents = getCocos2dVersion().split("[\\-\\s]");
         String version = versionComponents[versionComponents.length - 1];
