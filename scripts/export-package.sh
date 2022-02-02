@@ -75,7 +75,7 @@ done
 install "$PROJ_DIR"/src/android/Bugsnag.cpp "$PKG_DIR"/android
 
 # Copy in Android private headers
-install "$PROJ_DIR"/src/android/bugsnag-android/bugsnag-plugin-android-ndk/src/main/assets/include/{bugsnag,report}.h \
+install "$PROJ_DIR"/src/android/bugsnag-android/bugsnag-plugin-android-ndk/src/main/assets/include/{bugsnag,event}.h \
     "$PKG_DIR"/android/private
 
 # Copy in Android plugin sources

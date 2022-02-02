@@ -14,14 +14,14 @@ namespace bugsnag {
 static jclass BugsnagClass;
 static jmethodID BugsnagResumeSession;
 static jmethodID BugsnagStartSession;
-static jmethodID BugsnagStopSession;
+static jmethodID BugsnagPauseSession;
+static jmethodID BugsnagAddMetadata;
+static jmethodID BugsnagClearMetadata;
+static jmethodID BugsnagLeaveBreadcrumb;
+static jmethodID BugsnagSetContext;
+static jmethodID BugsnagSetUser;
 
-static jclass NativeInterfaceClass;
-static jmethodID NativeInterfaceAddToTab;
-static jmethodID NativeInterfaceClearTab;
-static jmethodID NativeInterfaceLeaveBreadcrumb;
-static jmethodID NativeInterfaceSetContext;
-static jmethodID NativeInterfaceSetUser;
+static jclass BreadcrumbTypeClass;
 
 static jclass HashMapClass;
 static jmethodID HashMapInit;
@@ -38,20 +38,20 @@ void _callBugsnagBooleanVoidMethod(jmethodID method);
 void _callBugsnagVoidMethod(jmethodID method);
 
 /**
- * Call a method on NativeInterface which returns void
+ * Call a method on Bugsnag which returns void
  */
-void _callNativeInterfaceVoidMethod(jmethodID method);
+void _callBugsnagVoidMethod(jmethodID method);
 
 /**
- * Call a method on NativeInterface which returns void and takes a single
+ * Call a method on Bugsnag which returns void and takes a single
  * string argument
  */
-void _callNativeInterfaceVoidStringMethod(jmethodID method, const char *value);
+void _callBugsnagVoidStringMethod(jmethodID method, const char *value);
 
 /**
  * Coerce breadcrumb type into JNI value
  */
-jstring _getBreadcrumbType(JNIEnv *env, BreadcrumbType type);
+jobject _getBreadcrumbType(JNIEnv *env, BreadcrumbType type);
 
 void Bugsnag::notify(string name, string message) {
   JNIEnv *env = cocos2d::JniHelper::getEnv();
@@ -70,7 +70,7 @@ void Bugsnag::setUser(const char *id, const char *name, const char *email) {
   jobject jname = name == nullptr ? NULL : env->NewStringUTF(name);
   jobject jemail = email == nullptr ? NULL : env->NewStringUTF(email);
 
-  env->CallStaticVoidMethod(NativeInterfaceClass, NativeInterfaceSetUser, jid, jemail, jname);
+  env->CallStaticVoidMethod(BugsnagClass, BugsnagSetUser, jid, jemail, jname);
 
   env->DeleteLocalRef(jid);
   env->DeleteLocalRef(jname);
@@ -82,7 +82,7 @@ void Bugsnag::startSession() {
 }
 
 void Bugsnag::pauseSession() {
-  _callBugsnagVoidMethod(BugsnagStopSession);
+  _callBugsnagVoidMethod(BugsnagPauseSession);
 }
 
 void Bugsnag::resumeSession() {
@@ -106,9 +106,9 @@ void Bugsnag::leaveBreadcrumb(string name, BreadcrumbType type,
   }
 
   jstring jname = env->NewStringUTF(name.c_str());
-  jstring jtype = _getBreadcrumbType(env, type);
-  env->CallStaticVoidMethod(NativeInterfaceClass, NativeInterfaceLeaveBreadcrumb, jname, 
-                            jtype, jmetadata);
+  jobject jtype = _getBreadcrumbType(env, type);
+  env->CallStaticVoidMethod(BugsnagClass, BugsnagLeaveBreadcrumb, jname,
+                            jmetadata, jtype);
 
   env->DeleteLocalRef(jname);
   env->DeleteLocalRef(jtype);
@@ -119,7 +119,7 @@ void _addMetadata(JNIEnv *env, string section, string key, void *jvalue) {
   jstring jsection = env->NewStringUTF(section.c_str());
   jstring jkey = env->NewStringUTF(key.c_str());
 
-  env->CallStaticVoidMethod(NativeInterfaceClass, NativeInterfaceAddToTab, jsection, jkey, jvalue);
+  env->CallStaticVoidMethod(BugsnagClass, BugsnagAddMetadata, jsection, jkey, jvalue);
 
   env->DeleteLocalRef(jsection);
   env->DeleteLocalRef(jkey);
@@ -144,32 +144,28 @@ void Bugsnag::clearMetadata(string section, string key) {
 }
 
 void Bugsnag::clearMetadata(string section) {
-  _callNativeInterfaceVoidStringMethod(NativeInterfaceClearTab, section.c_str());
+  _callBugsnagVoidStringMethod(BugsnagClearMetadata, section.c_str());
 }
 
 void Bugsnag::setContext(string context) {
-  _callNativeInterfaceVoidStringMethod(NativeInterfaceSetContext, context.c_str());
+  _callBugsnagVoidStringMethod(BugsnagSetContext, context.c_str());
 }
 
-jstring _getBreadcrumbType(JNIEnv *env, BreadcrumbType type) {
+static jobject breadcrumbTypes[Manual+1];
+
+jobject _getBreadcrumbType(JNIEnv *env, BreadcrumbType type) {
   switch (type) {
   case Request:
-    return env->NewStringUTF("request");
   case Navigation:
-    return env->NewStringUTF("navigation");
   case Log:
-    return env->NewStringUTF("log");
   case User:
-    return env->NewStringUTF("user");
   case State:
-    return env->NewStringUTF("state");
   case Process:
-    return env->NewStringUTF("process");
   case Error:
-    return env->NewStringUTF("error");
   case Manual:
+    return breadcrumbTypes[type];
   default:
-    return env->NewStringUTF("manual");
+    return breadcrumbTypes[Manual];
   }
 }
 
@@ -191,24 +187,21 @@ void _callBugsnagVoidMethod(jmethodID method) {
   env->CallStaticVoidMethod(BugsnagClass, method);
 }
 
-void _callNativeInterfaceVoidMethod(jmethodID method) {
-  JNIEnv *env = cocos2d::JniHelper::getEnv();
-  if (env == nullptr) {
-    return; // something has gone very wrong here.
-  }
-
-  env->CallStaticVoidMethod(NativeInterfaceClass, method);
-}
-
-void _callNativeInterfaceVoidStringMethod(jmethodID method, const char *value) {
+void _callBugsnagVoidStringMethod(jmethodID method, const char *value) {
   JNIEnv *env = cocos2d::JniHelper::getEnv();
   if (env == nullptr) {
     return; // something has gone very wrong here.
   }
 
   jobject jvalue = value == NULL ? NULL : env->NewStringUTF(value);
-  env->CallStaticVoidMethod(NativeInterfaceClass, method, jvalue);
+  env->CallStaticVoidMethod(BugsnagClass, method, jvalue);
   env->DeleteLocalRef(jvalue);
+}
+
+static void _mapBreadcrumbType(JNIEnv *env, BreadcrumbType type, const char* javaName) {
+  jfieldID field = env->GetStaticFieldID(BreadcrumbTypeClass, javaName, "Lcom/bugsnag/android/BreadcrumbType;");
+  jobject obj = env->GetStaticObjectField(BreadcrumbTypeClass, field);
+  bugsnag::breadcrumbTypes[type] = env->NewGlobalRef(obj);
 }
 
 } // namespace bugsnag
@@ -216,7 +209,7 @@ void _callNativeInterfaceVoidStringMethod(jmethodID method, const char *value) {
 extern "C" {
 JNIEXPORT void JNICALL Java_com_bugsnag_android_BugsnagCocos2dxPlugin_configureNativeComponents(
         JNIEnv *env, jobject _this) {
-  if (bugsnag::HashMapClass != nullptr && bugsnag::BugsnagClass != nullptr && bugsnag::NativeInterfaceClass != nullptr) {
+  if (bugsnag::HashMapClass != nullptr && bugsnag::BugsnagClass != nullptr) {
     return; // Initialization has already occurred
   }
   jclass HashMap = env->FindClass("java/util/HashMap");
@@ -229,6 +222,16 @@ JNIEXPORT void JNICALL Java_com_bugsnag_android_BugsnagCocos2dxPlugin_configureN
       bugsnag::HashMapClass, "put",
       "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
 
+  bugsnag::BreadcrumbTypeClass = env->FindClass("com/bugsnag/android/BreadcrumbType");
+  _mapBreadcrumbType(env, bugsnag::Navigation, "ERROR");
+  _mapBreadcrumbType(env, bugsnag::Request, "REQUEST");
+  _mapBreadcrumbType(env, bugsnag::Process, "PROCESS");
+  _mapBreadcrumbType(env, bugsnag::Log, "LOG");
+  _mapBreadcrumbType(env, bugsnag::User, "USER");
+  _mapBreadcrumbType(env, bugsnag::State, "STATE");
+  _mapBreadcrumbType(env, bugsnag::Error, "ERROR");
+  _mapBreadcrumbType(env, bugsnag::Manual, "MANUAL");
+
   jclass bugsnag = env->FindClass("com/bugsnag/android/Bugsnag");
   bugsnag::BugsnagClass = (jclass)env->NewGlobalRef(bugsnag);
   env->DeleteLocalRef(bugsnag);
@@ -236,28 +239,23 @@ JNIEXPORT void JNICALL Java_com_bugsnag_android_BugsnagCocos2dxPlugin_configureN
       bugsnag::BugsnagClass, "resumeSession", "()Z");
   bugsnag::BugsnagStartSession = env->GetStaticMethodID(
       bugsnag::BugsnagClass, "startSession", "()V");
-  bugsnag::BugsnagStopSession = env->GetStaticMethodID(
-      bugsnag::BugsnagClass, "stopSession", "()V");
-
-  jclass interface = env->FindClass("com/bugsnag/android/NativeInterface");
-  bugsnag::NativeInterfaceClass = (jclass)env->NewGlobalRef(interface);
-  env->DeleteLocalRef(interface);
-
-  bugsnag::NativeInterfaceSetContext = env->GetStaticMethodID(
-      bugsnag::NativeInterfaceClass, "setContext",
+  bugsnag::BugsnagPauseSession = env->GetStaticMethodID(
+      bugsnag::BugsnagClass, "pauseSession", "()V");
+  bugsnag::BugsnagSetContext = env->GetStaticMethodID(
+      bugsnag::BugsnagClass, "setContext",
       "(Ljava/lang/String;)V");
-  bugsnag::NativeInterfaceClearTab = env->GetStaticMethodID(
-      bugsnag::NativeInterfaceClass, "clearTab",
+  bugsnag::BugsnagClearMetadata = env->GetStaticMethodID(
+      bugsnag::BugsnagClass, "clearMetadata",
       "(Ljava/lang/String;)V");
-  bugsnag::NativeInterfaceSetUser = env->GetStaticMethodID(
-      bugsnag::NativeInterfaceClass, "setUser",
+  bugsnag::BugsnagSetUser = env->GetStaticMethodID(
+      bugsnag::BugsnagClass, "setUser",
       "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V");
-  bugsnag::NativeInterfaceAddToTab = env->GetStaticMethodID(
-      bugsnag::NativeInterfaceClass, "addToTab",
+  bugsnag::BugsnagAddMetadata = env->GetStaticMethodID(
+      bugsnag::BugsnagClass, "addMetadata",
       "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;)V");
-  bugsnag::NativeInterfaceLeaveBreadcrumb = env->GetStaticMethodID(
-      bugsnag::NativeInterfaceClass, "leaveBreadcrumb",
-      "(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V");
+  bugsnag::BugsnagLeaveBreadcrumb = env->GetStaticMethodID(
+      bugsnag::BugsnagClass, "leaveBreadcrumb",
+      "(Ljava/lang/String;Ljava/util/Map;Lcom/bugsnag/android/BreadcrumbType;)V");
 }
 
 JNIEXPORT jstring JNICALL Java_com_bugsnag_android_BugsnagCocos2dxPlugin_getCocos2dVersion(
