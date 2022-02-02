@@ -26,21 +26,28 @@ if(ANDROID)
     set_target_properties(bugsnag_ndk PROPERTIES IMPORTED_LOCATION
         ${BUGSNAG_NDK_DIR}/jni/${ANDROID_ABI}/libbugsnag-ndk.so)
     target_link_libraries(${BUGSNAG_LIB} bugsnag_ndk)
+
+    set_target_properties(${BUGSNAG_LIB} PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/bugsnag/include)
 elseif(APPLE)
     # Marked as 'global' because imported (pre-compiled) libraries are local to
     # the current file by default, unlike source libraries
     add_library(${BUGSNAG_LIB} STATIC IMPORTED GLOBAL)
-    if(MACOSX)
-        set_target_properties(${BUGSNAG_LIB} PROPERTIES
-            IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/bugsnag/cocoa/BugsnagCocos2dx.xcframework/macos-arm64_x86_64/libBugsnagCocos2dx.a)
-    elseif(IOS)
-        set_target_properties(${BUGSNAG_LIB} PROPERTIES
-            IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/bugsnag/cocoa/BugsnagCocos2dx.xcframework/ios-arm64_armv7/libBugsnagCocos2dx.a)
-    endif()
+    # Compute library directory within xcframework
+    if(IOS)
+        if(${CMAKE_OSX_SYSROOT} MATCHES iphonesimulator)
+            set(BUGSNAG_IMPORT_SUBDIR ios-arm64_i386_x86_64-simulator)
+        else() # is device
+            set(BUGSNAG_IMPORT_SUBDIR ios-arm64_armv7)
+        endif() # is simulator
+    else() # is mac
+        set(BUGSNAG_IMPORT_SUBDIR macos-arm64_x86_64)
+    endif() # is ios
+    set(BUGSNAG_BASE_DIR ${CMAKE_SOURCE_DIR}/bugsnag/cocoa/BugsnagCocos2dx.xcframework/${BUGSNAG_IMPORT_SUBDIR})
+    set_target_properties(${BUGSNAG_LIB} PROPERTIES
+        IMPORTED_LOCATION ${BUGSNAG_BASE_DIR}/libBugsnagCocos2dx.a
+        INTERFACE_INCLUDE_DIRECTORIES ${BUGSNAG_BASE_DIR}/Headers)
 endif()
-
-set_target_properties(${BUGSNAG_LIB} PROPERTIES
-    INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_SOURCE_DIR}/bugsnag/include)
 
 # Export settings into parent project
 set(BUGSNAG_LINKER_FLAGS ${EXTRA_LINKING_FLAGS} PARENT_SCOPE)
