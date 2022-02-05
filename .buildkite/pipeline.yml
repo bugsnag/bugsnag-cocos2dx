@@ -1,5 +1,5 @@
 agents:
-  queue: opensource-mac-cocoa-10.15
+  queue: opensource-arm-mac-cocoa-12
 
 steps:
   - name: 'Run macOS unit tests'
