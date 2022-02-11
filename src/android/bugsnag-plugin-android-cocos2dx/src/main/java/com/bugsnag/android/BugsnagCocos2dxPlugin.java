@@ -1,6 +1,6 @@
 package com.bugsnag.android;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 public class BugsnagCocos2dxPlugin implements Plugin {
     static final String pluginVersion = "1.1.0";

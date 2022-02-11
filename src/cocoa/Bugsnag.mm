@@ -48,11 +48,15 @@ void Bugsnag::pauseSession() {
     [NSClassFromString(@"Bugsnag") pauseSession];
 }
 
-void Bugsnag::resumeSession() {
-    [NSClassFromString(@"Bugsnag") resumeSession];
+bool Bugsnag::resumeSession() {
+    return [NSClassFromString(@"Bugsnag") resumeSession];
 }
 
 void Bugsnag::leaveBreadcrumb(string name, BreadcrumbType type, map<string, string> metadata) {
+    return Bugsnag::leaveBreadcrumb(name, metadata, type);
+}
+
+void Bugsnag::leaveBreadcrumb(string name, map<string, string> metadata, BreadcrumbType type) {
     NSMutableDictionary *ns_metadata = [NSMutableDictionary new];
     BSGBreadcrumbType ns_type = _getBreadcrumbType(type);
     NSString *ns_name = [NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding];
@@ -70,6 +74,17 @@ void Bugsnag::addMetadata(string section, string key, string value) {
     NSString *ns_key = [NSString stringWithCString:key.c_str() encoding:NSUTF8StringEncoding];
     NSString *ns_value = [NSString stringWithCString:value.c_str() encoding:NSUTF8StringEncoding];
     [NSClassFromString(@"Bugsnag") addMetadata:ns_value withKey:ns_key toSection:ns_section];
+}
+
+void Bugsnag::addMetadata(string section, map<string, string> metadata) {
+    NSString *ns_section = [NSString stringWithCString:section.c_str() encoding:NSUTF8StringEncoding];
+    NSMutableDictionary *ns_metadata = [NSMutableDictionary new];
+    for (pair<string, string> item : metadata) {
+        NSString *key = [NSString stringWithCString:item.first.c_str() encoding:NSUTF8StringEncoding];
+        NSString *obj = [NSString stringWithCString:item.second.c_str() encoding:NSUTF8StringEncoding];
+        [ns_metadata setObject:obj forKey:key];
+    }
+    [NSClassFromString(@"Bugsnag") addMetadata:ns_metadata toSection:ns_section];
 }
 
 void Bugsnag::clearMetadata(string section, string key) {

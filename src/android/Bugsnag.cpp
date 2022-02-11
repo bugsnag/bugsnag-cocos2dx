@@ -16,6 +16,7 @@ static jmethodID BugsnagResumeSession;
 static jmethodID BugsnagStartSession;
 static jmethodID BugsnagPauseSession;
 static jmethodID BugsnagAddMetadata;
+static jmethodID BugsnagAddMetadataMap;
 static jmethodID BugsnagClearMetadata;
 static jmethodID BugsnagLeaveBreadcrumb;
 static jmethodID BugsnagSetContext;
@@ -30,7 +31,7 @@ static jmethodID HashMapPut;
 /**
  * Call a method on Bugsnag which returns boolean
  */
-void _callBugsnagBooleanVoidMethod(jmethodID method);
+bool _callBugsnagBooleanVoidMethod(jmethodID method);
 
 /**
  * Call a method on Bugsnag which returns void
@@ -85,12 +86,18 @@ void Bugsnag::pauseSession() {
   _callBugsnagVoidMethod(BugsnagPauseSession);
 }
 
-void Bugsnag::resumeSession() {
-  _callBugsnagBooleanVoidMethod(BugsnagResumeSession);
+bool Bugsnag::resumeSession() {
+  return _callBugsnagBooleanVoidMethod(BugsnagResumeSession);
 }
 
 void Bugsnag::leaveBreadcrumb(string name, BreadcrumbType type,
                               map<string, string> metadata) {
+
+  Bugsnag::leaveBreadcrumb(name, metadata, type);
+}
+
+void Bugsnag::leaveBreadcrumb(string name, map<string, string> metadata,
+                              BreadcrumbType type) {
   JNIEnv *env = cocos2d::JniHelper::getEnv();
   if (env == nullptr) {
     return; // something has gone very wrong here.
@@ -111,8 +118,8 @@ void Bugsnag::leaveBreadcrumb(string name, BreadcrumbType type,
                             jmetadata, jtype);
 
   env->DeleteLocalRef(jname);
-  env->DeleteLocalRef(jtype);
   env->DeleteLocalRef(jmetadata);
+  // Note: jtype is a global; do not delete its ref!
 }
 
 void _addMetadata(JNIEnv *env, string section, string key, void *jvalue) {
@@ -133,6 +140,29 @@ void Bugsnag::addMetadata(string section, string key, string value) {
   jobject jvalue = env->NewStringUTF(value.c_str());
   _addMetadata(env, section, key, jvalue);
   env->DeleteLocalRef(jvalue);
+}
+
+void Bugsnag::addMetadata(string section, map<string, string> metadata) {
+  JNIEnv *env = cocos2d::JniHelper::getEnv();
+  if (env == nullptr) {
+    return; // something has gone very wrong here.
+  }
+
+  jobject jsection = env->NewStringUTF(section.c_str());
+  jobject jmetadata = env->NewObject(HashMapClass, HashMapInit);
+  for (pair<string, string> item : metadata) {
+    jstring key = env->NewStringUTF(item.first.c_str());
+    jstring value = env->NewStringUTF(item.second.c_str());
+    env->CallObjectMethod(jmetadata, HashMapPut, key, value);
+    env->DeleteLocalRef(key);
+    env->DeleteLocalRef(value);
+  }
+
+  env->CallStaticVoidMethod(BugsnagClass, BugsnagAddMetadataMap, jsection,
+                            jmetadata);
+
+  env->DeleteLocalRef(jmetadata);
+  env->DeleteLocalRef(jsection);
 }
 
 void Bugsnag::clearMetadata(string section, string key) {
@@ -169,13 +199,13 @@ jobject _getBreadcrumbType(JNIEnv *env, BreadcrumbType type) {
   }
 }
 
-void _callBugsnagBooleanVoidMethod(jmethodID method) {
+bool _callBugsnagBooleanVoidMethod(jmethodID method) {
   JNIEnv *env = cocos2d::JniHelper::getEnv();
   if (env == nullptr) {
-    return; // something has gone very wrong here.
+    return false; // something has gone very wrong here.
   }
 
-  env->CallStaticBooleanMethod(BugsnagClass, method);
+  return env->CallStaticBooleanMethod(BugsnagClass, method);
 }
 
 void _callBugsnagVoidMethod(jmethodID method) {
@@ -253,6 +283,9 @@ JNIEXPORT void JNICALL Java_com_bugsnag_android_BugsnagCocos2dxPlugin_configureN
   bugsnag::BugsnagAddMetadata = env->GetStaticMethodID(
       bugsnag::BugsnagClass, "addMetadata",
       "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;)V");
+  bugsnag::BugsnagAddMetadataMap = env->GetStaticMethodID(
+      bugsnag::BugsnagClass, "addMetadata",
+      "(Ljava/lang/String;Ljava/util/Map;)V");
   bugsnag::BugsnagLeaveBreadcrumb = env->GetStaticMethodID(
       bugsnag::BugsnagClass, "leaveBreadcrumb",
       "(Ljava/lang/String;Ljava/util/Map;Lcom/bugsnag/android/BreadcrumbType;)V");

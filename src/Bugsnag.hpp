@@ -114,13 +114,21 @@ public:
    * @see startSession
    * @see pauseSession
    */
-  static void resumeSession();
+  static bool resumeSession();
 
   /**
    * Leave a "breadcrumb" log message with additional information about the
    * environment at the time the breadcrumb was captured.
    */
-  static void leaveBreadcrumb(string name, BreadcrumbType type,
+  static void leaveBreadcrumb(string message, map<string, string> metadata,
+                              BreadcrumbType type);
+
+  /**
+   * Leave a "breadcrumb" log message with additional information about the
+   * environment at the time the breadcrumb was captured.
+   * DEPRECATED API
+   */
+  static void leaveBreadcrumb(string message, BreadcrumbType type,
                               map<string, string> metadata);
 
   /**
@@ -128,6 +136,12 @@ public:
    *  delete the current value for key
    */
   static void addMetadata(string section, string key, string value);
+
+  /**
+   * Add custom data to send to Bugsnag with every exception under the specified
+   * section.
+   */
+  static void addMetadata(string section, map<string, string> metadata);
 
   /** Remove custom data from Bugsnag reports. */
   static void clearMetadata(string section);
