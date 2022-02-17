@@ -29,16 +29,36 @@
 
 class HelloWorld : public cocos2d::Scene
 {
+private:
+    const int fontSize = 22;
+    const int menuItemHeight = 26;
+
+    cocos2d::Menu *menu;
+    cocos2d::Vec2 topMid;
+    int menuIndex = 0;
+    
+    void addMenuItem(const std::string text, const cocos2d::ccMenuCallback& callback);
+
+    void menuCloseCallback(cocos2d::Ref* pSender);
+    void unhandledCallback(cocos2d::Ref* pSender);
+    void handledCallback(cocos2d::Ref* pSender);
+    void addMetadataSingleCallback(cocos2d::Ref* pSender);
+    void addMetadataSectionCallback(cocos2d::Ref* pSender);
+    void leaveBreadcrumbCallback(cocos2d::Ref* pSender);
+    void setUserCallback(cocos2d::Ref* pSender);
+    void startSessionCallback(cocos2d::Ref* pSender);
+    void pauseSessionCallback(cocos2d::Ref* pSender);
+    void resumeSessionCallback(cocos2d::Ref* pSender);
+
 public:
     static cocos2d::Scene* createScene();
 
     virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
+
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+    char *badPointer = NULL;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
