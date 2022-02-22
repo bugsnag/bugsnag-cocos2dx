@@ -24,8 +24,11 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include <BugsnagCocos2dx/Bugsnag.hpp>
 
 USING_NS_CC;
+
+using namespace bugsnag;
 
 Scene* HelloWorld::createScene()
 {
@@ -75,53 +78,34 @@ bool HelloWorld::init()
         closeItem->setPosition(Vec2(x,y));
     }
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
+    /////////////////////////////
+    // Bugsnag test code
+
+    menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    /////////////////////////////
-    // 3. add your codes below...
+    topMid = Vec2(visibleSize.width/2 + origin.x, visibleSize.height + origin.y - 20);
 
-    // add a label shows "Hello World"
-    // create and initialize a label
+    addMenuItem("Close", CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+    addMenuItem("Unhandled", CC_CALLBACK_1(HelloWorld::unhandledCallback, this));
+    addMenuItem("Handled", CC_CALLBACK_1(HelloWorld::handledCallback, this));
+    addMenuItem("Metadata (Single)", CC_CALLBACK_1(HelloWorld::addMetadataSingleCallback, this));
+    addMenuItem("Metadata (Section)", CC_CALLBACK_1(HelloWorld::addMetadataSectionCallback, this));
+    addMenuItem("Leave Breadcrumb", CC_CALLBACK_1(HelloWorld::leaveBreadcrumbCallback, this));
+    addMenuItem("Set User", CC_CALLBACK_1(HelloWorld::setUserCallback, this));
+    addMenuItem("Start Session", CC_CALLBACK_1(HelloWorld::startSessionCallback, this));
+    addMenuItem("Pause Session", CC_CALLBACK_1(HelloWorld::pauseSessionCallback, this));
+    addMenuItem("Resume Session", CC_CALLBACK_1(HelloWorld::resumeSessionCallback, this));
 
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
-
-        // add the label as a child to this layer
-        this->addChild(label, 1);
-    }
-
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
     return true;
 }
 
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
-    abort(); // Crash the app
+    printf("HelloWorld::menuCloseCallback\n");
+
     //Close the cocos2d-x game scene and quit the application
     Director::getInstance()->end();
 
@@ -129,6 +113,57 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
+}
 
+void HelloWorld::addMenuItem(const string text, const ccMenuCallback& callback) {
+    auto mi = MenuItemLabel::create(Label::createWithTTF(text, "fonts/arial.ttf", fontSize), callback);
+    mi->setAnchorPoint(Vec2(0.5, 1));
+    mi->setPosition(Vec2(topMid.x, topMid.y - menuItemHeight * menuIndex));
+    menu->addChild(mi);
+    menuIndex++;
+}
 
+void HelloWorld::unhandledCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::unhandledCallback\n");
+    *badPointer = 1;
+}
+
+void HelloWorld::handledCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::handledCallback\n");
+    Bugsnag::notify("A handled error", "Something broke!");
+}
+
+void HelloWorld::addMetadataSingleCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::addMetadataSingleCallback\n");
+    Bugsnag::addMetadata("single", "a section", "a value");
+}
+
+void HelloWorld::addMetadataSectionCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::addMetadataSectionCallback\n");
+    Bugsnag::addMetadata("multi", {{"a", "1"}, {"b", "2"}});
+}
+
+void HelloWorld::leaveBreadcrumbCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::leaveBreadcrumbCallback\n");
+    Bugsnag::leaveBreadcrumb("Leaving breadcrumb", State, {{"foo", "bar"}});
+}
+
+void HelloWorld::setUserCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::setUserCallback\n");
+    Bugsnag::setUser("myuser", "myuser@bugsnag.com", "My User");
+}
+
+void HelloWorld::startSessionCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::startSessionCallback\n");
+    Bugsnag::startSession();
+}
+
+void HelloWorld::pauseSessionCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::pauseSessionCallback\n");
+    Bugsnag::pauseSession();
+}
+
+void HelloWorld::resumeSessionCallback(cocos2d::Ref* pSender) {
+    printf("HelloWorld::resumeSessionCallback\n");
+    printf("Bugsnag::resumeSession: %d\n", Bugsnag::resumeSession());
 }

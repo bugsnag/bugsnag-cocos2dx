@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>Icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.cocos2dx.example-cpp-app</string>
+	<string>com.bugsnag.example-cpp-app</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -32,5 +32,10 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>bugsnag</key>
+	<dict>
+		<key>apiKey</key>
+		<string>put-your-bugsnag-api-key-here</string>
+	</dict>
 </dict>
 </plist>

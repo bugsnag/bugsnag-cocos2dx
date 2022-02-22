@@ -133,4 +133,3 @@ xcodebuild -create-xcframework \
 pushd "$BUILD_DIR"
     zip -r "$ZIPFILE" bugsnag
 popd
-

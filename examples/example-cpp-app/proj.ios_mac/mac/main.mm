@@ -25,16 +25,22 @@
 
 #include "AppDelegate.h"
 #include "cocos2d.h"
-#import <BugsnagCocos2dx/cocoa/BugsnagCocos2dxPlugin.h>
-#import <BugsnagCocos2dx/cocoa/Bugsnag.h>
+#import <BugsnagCocos2dx/BugsnagCocos2dxPlugin.h>
 
 USING_NS_CC;
 
 int main(int argc, char *argv[])
 {
-    [BugsnagCocos2dxPlugin registerWithCocos2dVersion:cocos2dVersion()];
-    [Bugsnag startBugsnagWithApiKey:@"YOUR-API-KEY-HERE"];
-    
+    BugsnagConfiguration *configuration = [BugsnagConfiguration loadConfig];
+    [configuration addPlugin:[BugsnagCocos2dxPlugin new]];
+
+    // Example custom configuration
+    configuration.context = @"context a";
+    [configuration addFeatureFlagWithName:@"feature a"];
+    configuration.sendThreads = BSGThreadSendPolicyAlways;
+
+    [Bugsnag startWithConfiguration:configuration];
+
     AppDelegate app;
     return Application::getInstance()->run();
 }

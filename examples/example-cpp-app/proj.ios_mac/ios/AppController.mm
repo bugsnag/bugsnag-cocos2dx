@@ -28,9 +28,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
-#import <BugsnagCocos2dx/cocoa/BugsnagCocos2dxPlugin.h>
-#import <BugsnagCocos2dx/cocoa/Bugsnag.h>
-#import <cocos/cocos2d.h>
+#import <BugsnagCocos2dx/BugsnagCocos2dxPlugin.h>
 
 @implementation AppController
 
@@ -43,9 +41,16 @@
 static AppDelegate s_sharedApplication;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [BugsnagCocos2dxPlugin registerWithCocos2dVersion:cocos2d::cocos2dVersion()];
-    [Bugsnag startBugsnagWithApiKey:@"YOUR-API-KEY-HERE"];
-    
+    BugsnagConfiguration *configuration = [BugsnagConfiguration loadConfig];
+    [configuration addPlugin:[BugsnagCocos2dxPlugin new]];
+
+    // Example custom configuration
+    configuration.context = @"context a";
+    [configuration addFeatureFlagWithName:@"feature a"];
+    configuration.sendThreads = BSGThreadSendPolicyAlways;
+
+    [Bugsnag startWithConfiguration:configuration];
+
     cocos2d::Application *app = cocos2d::Application::getInstance();
     
     // Initialize the GLView attributes
