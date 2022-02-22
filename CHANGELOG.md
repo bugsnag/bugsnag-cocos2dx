@@ -1,14 +1,22 @@
 # Changelog
 
-## TBD
+## 2.0.0 (TBD)
 
-### Enhancements
+This release bumps the native [Android](https://github.com/bugsnag/bugsnag-android) and [iOS/macOS](https://github.com/bugsnag/bugsnag-cocoa) libraries to their latest major versions to take advantage of the latest enhancements and bug fixes.
 
-* Updated to the latest Bugsnag Cocoa library. This brings a number of changes. Please see the updated docs at https://docs.bugsnag.com/platforms/cocos2dx/
-  - The cocoa library is now distributed as an xcframework.
-  - All required headers are also inside the xcframework, so it is no longer necessary to have custom header search paths.
-  - Initializing the Bugsnag Cocos2d-x plugin for Cocoa is now done using a similar API to the Bugsnag Cocoa library.
-  - The distributed zipfile now keeps everything inside a top-level "bugsnag" folder.
+**Please note**, this release contains a breaking change to the setup instructions of the library: it is now initialized as a plugin in the Bugsnag configuration object. For example, in Android:
+
+```diff
+- BugsnagCocos2dxPlugin.register();
+- Bugsnag.init(this.getApplicationContext());
++ Configuration config = Configuration.load(this);
++ config.addPlugin(new BugsnagCocos2dxPlugin());
++ Bugsnag.start(this, config);
+```
+
+In addition, the iOS/macOS library is now distributed as an `xcframework` so it is no longer necessary to have custom header search paths. The distributed `.zip` file now keeps everything inside a top-level "bugsnag" folder.
+
+For more information, please see the updated docs at https://docs.bugsnag.com/platforms/cocos2dx/
 
 ## 1.1.0 (2021-12-06)
 
