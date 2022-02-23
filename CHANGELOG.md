@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 (TBD)
+## 2.0.0 (2022-02-23)
 
 This release bumps the native [Android](https://github.com/bugsnag/bugsnag-android) and [iOS/macOS](https://github.com/bugsnag/bugsnag-cocoa) libraries to their latest major versions to take advantage of the latest enhancements and bug fixes.
 
