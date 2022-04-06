@@ -1,6 +1,13 @@
 # Changelog
 
-## 2.0.0 (TBD)
+## 2.0.1 (TBD)
+
+### Enhancements
+
+* Updates the bugsnag-android dependency from v5.19.1 to [v5.22.0](https://github.com/bugsnag/bugsnag-android/blob/master/CHANGELOG.md#5220-2022-03-31)
+* Updates the bugsnag-cocoa dependency from v6.16.1 to [v6.16.5](https://github.com/bugsnag/bugsnag-cocoa/blob/master/CHANGELOG.md#6165-2022-03-30)
+
+## 2.0.0 (2022-02-23)
 
 This release bumps the native [Android](https://github.com/bugsnag/bugsnag-android) and [iOS/macOS](https://github.com/bugsnag/bugsnag-cocoa) libraries to their latest major versions to take advantage of the latest enhancements and bug fixes.
 
