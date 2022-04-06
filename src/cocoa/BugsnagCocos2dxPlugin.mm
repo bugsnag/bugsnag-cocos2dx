@@ -2,7 +2,7 @@
 #import "BugsnagClient+Private.h"
 #import "BugsnagNotifier.h"
 
-static NSString *const BUGSNAG_COCOS2DX_VERSION = @"1.1.0";
+static NSString *const BUGSNAG_COCOS2DX_VERSION = @"2.0.1";
 
 namespace cocos2d {
     extern const char* cocos2dVersion();
