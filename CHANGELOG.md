@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.1 (2022-04-06)
+## 2.0.1 (2022-04-11)
 
 ### Enhancements
 
@@ -9,7 +9,7 @@
 
 ## 2.0.0 (2022-02-23)
 
-This release bumps the native [Android](https://github.com/bugsnag/bugsnag-android) and [iOS/macOS](https://github.com/bugsnag/bugsnag-cocoa) libraries to their latest major versions to take advantage of the latest enhancements and bug fixes.
+This release bumps the native Bugsnag Android and iOS/macOS libraries to their latest major versions (`bugsnag-android` [v5.19.1](https://github.com/bugsnag/bugsnag-android/releases/tag/v5.19.1) and `bugsnag-cocoa` [v6.16.1](https://github.com/bugsnag/bugsnag-cocoa/releases/tag/v6.16.1)) to take advantage of the latest enhancements and bug fixes.
 
 **Please note**, this release contains a breaking change to the setup instructions of the library: it is now initialized as a plugin in the Bugsnag configuration object. For example, in Android:
 
