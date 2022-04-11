@@ -12,5 +12,5 @@ RELEASE_VERSION="$1"
 echo Bumping the version number to $RELEASE_VERSION
 sed -i '' "s/versionName '.*'/versionName '$RELEASE_VERSION'/" src/android/bugsnag-plugin-android-cocos2dx/build.gradle
 sed -i '' "s/pluginVersion = \".*\"/pluginVersion = \"$RELEASE_VERSION\"/" src/android/bugsnag-plugin-android-cocos2dx/src/main/java/com/bugsnag/android/BugsnagCocos2dxPlugin.java
-sed -i '' "s/BUGSNAG_COCOS2DX_VERSION =.*/BUGSNAG_COCOS2DX_VERSION = @\"$RELEASE_VERSION\";/" src/cocoa/BugsnagCocos2dxPlugin.m
+sed -i '' "s/BUGSNAG_COCOS2DX_VERSION =.*/BUGSNAG_COCOS2DX_VERSION = @\"$RELEASE_VERSION\";/" src/cocoa/BugsnagCocos2dxPlugin.mm
 sed -i '' "s/## TBD/## $RELEASE_VERSION ($(date '+%Y-%m-%d'))/" CHANGELOG.md
