@@ -1,5 +1,11 @@
 # Changelog
 
+## TBD
+
+### Enhancements
+
+* Updates the bugsnag-cocoa dependency from v6.16.5 to [v6.23.0](https://github.com/bugsnag/bugsnag-cocoa/blob/master/CHANGELOG.md#6230-2022-09-14)
+
 ## 2.0.1 (2022-04-11)
 
 ### Enhancements

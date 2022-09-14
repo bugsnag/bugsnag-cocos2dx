@@ -1,6 +1,5 @@
 #import "BugsnagCocos2dxPlugin.h"
-#import "BugsnagClient+Private.h"
-#import "BugsnagNotifier.h"
+#import "BugsnagInternals.h"
 
 static NSString *const BUGSNAG_COCOS2DX_VERSION = @"2.0.1";
 
