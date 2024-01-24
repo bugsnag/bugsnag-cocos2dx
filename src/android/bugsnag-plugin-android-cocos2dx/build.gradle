@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         minSdkVersion 16 // Minimum version supported by Cocos2dx
-        versionName '2.0.1'
+        versionName '2.0.2'
     }
 }
 

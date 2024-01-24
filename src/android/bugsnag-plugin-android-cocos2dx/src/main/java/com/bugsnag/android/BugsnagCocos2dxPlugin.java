@@ -3,7 +3,7 @@ package com.bugsnag.android;
 import java.util.Collections;
 
 public class BugsnagCocos2dxPlugin implements Plugin {
-    static final String pluginVersion = "2.0.1";
+    static final String pluginVersion = "2.0.2";
 
     @Override
     public void unload() {
